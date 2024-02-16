@@ -1,0 +1,137 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook Templater</h1>
+        <h5 class="card-subtitle text-muted">The Templater KvBook allow you to parse a file containing placeholders  with KaiaC.</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a Templater KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-TEMPLATER.png"
+        alt="kvbooks-TEMPLATER"
+        width="80%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_AWS_REGION</td>
+                        <td>us-west-2</td>
+                        <td>The AWS region your resources will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_AWS_CRED_FILE_PATH</td>
+                        <td>~/.aws/credentials</td>
+                        <td>The AWS credentials file path</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_AWS_CRED_PROFILE</td>
+                        <td>default</td>
+                        <td>The AWS credentials profile</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>templater</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>tpl001</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>GL_NAME</td>
+                        <td>demo1</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_STAGE</td>
+                        <td>staging</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>GL_INPUT_CONFIG_FILE</td>
+                        <td>/templater/001_runbook_cloud_oregon_templater_alfresco_config.json</td>
+                        <td>The environment variables config json file. For example:
+                             
+                            <pre>
+{{ '{' }}                                
+    "TF_VAR_ENV_APP_GL_AWS_REGION": "us-west-2",
+    "TF_VAR_ENV_APP_GL_NAMESPACE": "alfresco",
+    "TF_VAR_ENV_APP_GL_STAGE": "prod",
+    "TF_VAR_ENV_APP_GL_ROOT_DOMAIN": "skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_LOCAL_PORT": "8080",
+    "TF_VAR_ENV_APP_BE_EXPOSED_PROTOCOL": "http",
+    "TF_VAR_ENV_APP_BE_UPDATE_DNS_IF_RESTART": "YES",
+    "TF_VAR_ENV_APP_HOSTED_ZONE_ID": "Z0017173R6DN4LL9QIY3",
+    "TF_VAR_ENV_APP_WAIT_INTERVAL": "5",
+    "TF_VAR_ENV_APP_CHANNEL_DEFAULT": "API",
+    "TF_VAR_ENV_APP_API_SEND_COMMAND_URL": "https://lamb001.skyscaledev.com/send_command",
+    "TF_VAR_ENV_APP_TAG_NAME": "Deployment",
+    "TF_VAR_ENV_APP_LOCAL_FOLDER_PREFIX": "/kaiac",
+    "TF_VAR_ENV_APP_MONITORING_CONTEXT": "alfresco/service/api/server",
+    "TF_VAR_ENV_APP_MONITOR_RETRY_COUNTER_DEFAULT": "3",
+    "TF_VAR_ENV_APP_LOG_FILE_OUTPUT": "/root/manager.log"
+{{ '}' }} 
+                            </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>GL_INPUT_TEMPLATE_FILE</td>
+                        <td>/templater/manager.sh.template</td>
+                        <td>The input template file</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>GL_OUTPUT_GENERATED_FILE</td>
+                        <td>/root/manager.sh</td>
+                        <td>The output file</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>On your local virtual machine.</pre>
+        <pre>Check the generated file</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try Templater with KaiaC :</pre>
+        <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="templater"
+GL_NAMESPACE="tpl001"
+GL_NAME="demo1"
+GL_STAGE="staging"
+GL_INPUT_CONFIG_FILE="/templater/001_runbook_cloud_oregon_templater_alfresco_config.json"
+GL_INPUT_TEMPLATE_FILE="/templater/manager.sh.template"
+GL_OUTPUT_GENERATED_FILE="/root/manager.sh"
+            
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

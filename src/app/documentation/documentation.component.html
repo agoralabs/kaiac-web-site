@@ -1,0 +1,255 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KaiaC Documentation</h1>
+        <h3 class="card-subtitle text-muted">Kaiac lets you create AWS cloud resources using just simple key/values configuration files</h3>
+
+        <pre>
+        </pre>
+        <h2>1) But you first need an S3 bucket !</h2>
+        <h4 class="card-subtitle text-muted">To work properly, Kaiac use an aws s3 backend to store the state of your infrastructure.</h4>
+        <h5>So lets suppose that the S3 bucket you created has the following name :</h5>
+        <pre>agoralabs-iac-tf-state-bucket
+
+        </pre>
+
+        <h2>2) Now you can configure KaiaC!</h2>
+
+        <h3>First execute the following command:</h3>
+        <pre>$ kaiac configure</pre>
+        <h4>You should see the following</h4>
+        <pre>
+            Install kaiac dependencies [Y/N]: 
+            Create SSH keys [Y/N]:
+            Configure AWS profile [Y/N]:
+            Configure terraform state bucket [Y/N]: Y
+            Enter an AWS region [us-west-2]:
+            Enter terraform state bucket name [kaiac-tf-state-bucket]: enter-your-bucket-name-here
+        </pre>
+
+        <h4>Here is an example :</h4>
+        <pre>
+            Install kaiac dependencies [Y/N]: 
+            Create SSH keys [Y/N]: Y
+            Generating public/private rsa key pair.
+            Your identification has been saved in /root/.ssh/id_rsa
+            Your public key has been saved in /root/.ssh/id_rsa.pub
+            The key fingerprint is:
+            SHA256:5XUUlEm1Z27K5qKq5SXzOnG5/HrEw57ID8UR3ppWLy8 root@vagrant
+            The key's randomart image is:
+            +---[RSA 3072]----+
+            |            .o==.|
+            |           . +o .|
+            |          . + +.o|
+            |         o o * +.|
+            |        S .+* . +|
+            |        . oo=. = |
+            |        +=o= oE .|
+            |       o.==.=o . |
+            |      ..+++*o..  |
+            +----[SHA256]-----+
+            SSH Keys generated : /root/.ssh/id_rsa
+            Configure AWS profile [Y/N]: Y
+            Enter AWS profile name [default]:
+            AWS Access Key ID [None]: **************Q7Q
+            AWS Secret Access Key [None]: ******************************iUijh
+            Default region name [None]: us-west-2
+            Default output format [None]:
+            Files ~/.aws/config and ~/.aws/credentials configured
+            Configure terraform state bucket [Y/N]: Y
+            Enter an AWS region [us-west-2]:
+            Enter terraform state bucket name [kaiac-tf-state-bucket]: agoralabs-iac-tf-state-bucket
+        </pre>
+
+        <h2>3) Now you can use KaiaC!</h2>
+
+        <h3>Let's create a t2.micro EC2 virtual machine with Kaiac.</h3>
+
+        <h4>Step 1 : Create a kvbook</h4>
+        <h5>A kvbook is just the file that contains your key/value(s) configuration informations. You have to create a kvbook to tell KaiaC which type of resources you need.</h5>
+        <h5>Hit the following command!</h5>
+        <pre>$ kaiac create vmonly</pre>
+        <h5>The result should look like :</h5>
+        <pre>KvBook /root/kvbooks/vmonly-3Bpkcs9rPV1a.cfg created!</pre>
+
+        <h4>Step 2 : Edit your kvbook</h4>
+        <h5>Hit the following command!</h5>
+        <pre>$ nano /root/kvbooks/vmonly-3Bpkcs9rPV1a.cfg</pre>
+        <h5>The file will look like this, if it is ok for you, leave it as is :</h5>
+        <pre>
+            GL_KAIAC_MODULE="vmonly"
+            GL_NAMESPACE="vmonly001"
+            GL_NAME="demo1"
+            GL_STAGE="staging"
+            BE_AMI_NAME="ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230919"
+            BE_EC2_TYPE="t2.micro"
+            BE_EC2_VOLUME_SIZE="8"
+            BE_PATH_EC2_PUBKEY="~/.ssh/id_rsa.pub"
+        </pre>
+
+        <h4>Step 3 : Register your kvbook</h4>
+        <h5>Hit the following command!</h5>
+        <pre>$ kaiac register /root/kvbooks/vmonly-3Bpkcs9rPV1a.cfg</pre>
+
+        <h4>Step 4 : Check your kvbook</h4>
+        <h5>Hit the following command!</h5>
+        <pre>$ kaiac plan</pre>
+
+        <h4>Step 5 : Apply your kvbook</h4>
+        <h5>Hit the following command!</h5>
+        <pre>$ kaiac apply</pre>
+
+        <h4>Step 6 : Check your resources</h4>
+        <h5>Connect to your <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#Home:">AWS EC2 Console</a>.</h5>
+        <h5>You should see your created EC2 instance</h5>
+
+        <h4>Step 7 : Destroy your resources</h4>
+        <h5>Hit the following command!</h5>
+        <pre>$ kaiac destroy</pre>
+
+        <h4>Step 8 : Check your resources again</h4>
+        <h5>Connect to your <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#Home:">AWS EC2 Console</a>.</h5>
+        <h5>You should see your terminated EC2 instance</h5>
+        <pre></pre>
+
+        <h2>4) Explore KaiaC commands !</h2>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Command </th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                        <th class="text-dark font-medium fs-4">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>env</strong></td>
+                        <td>Show current script version, backend state, aws region, aws profile, kvbook, kaiac module, kaiac context</td>
+                        <td>
+                            <pre>
+$ kaiac env
+VERSION   = 0.0.7
+STATE     = bucket[Not defined] region[us-west-2] profile[default]
+RESOURCES = region[us-west-2] profile[default]
+KVBOOK    = Not defined
+MODULE    = Not defined
+CONTEXT   = namespace[Not defined] name[Not defined] stage[Not defined]
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>configure</strong></td>
+                        <td>Configure KaiaC : It will install dependencies, ssh keys, aws profile, aws region, s3 bucket to store terraform state</td>
+                        <td>
+                            <pre>
+$ kaiac configure
+Install kaiac dependencies [Y/N]: 
+Create SSH keys [Y/N]:
+Configure AWS profile [Y/N]:
+Configure terraform state bucket [Y/N]: Y
+Enter an AWS region [us-west-2]:
+Enter terraform state bucket name [kaiac-tf-state-bucket]: enter-your-bucket-name-here
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>create [module]</strong></td>
+                        <td>Create a ready to use kvbook</td>
+                        <td>
+                            <pre>
+$ kaiac create vmonly
+KvBook /root/kvbooks/vmonly-3Bpkcs9rPV1a.cfg created!
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>register [kvbook]</strong></td>
+                        <td>Register the KvBook to use</td>
+                        <td>
+                            <pre>
+$ kaiac register /root/kvbooks/vmonly-3Bpkcs9rPV1a.cfg
+KvBook /root/kvbooks/vmonly-3Bpkcs9rPV1a.cfg registered!
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>plan</strong></td>
+                        <td>Show resources to be created for the registered KvBook.</td>
+                        <td>
+                            <pre>
+$ kaiac plan
+Same output as terraform plan!
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>apply</strong></td>
+                        <td>Create the resources needed for the registered KvBook.</td>
+                        <td>
+                            <pre>
+$ kaiac apply
+Same output as terraform apply -auto-approve!
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><strong>destroy</strong></td>
+                        <td>destroy all resources created for the registered KvBook.</td>
+                        <td>
+                            <pre>
+$ kaiac destroy
+Same output as terraform destroy -auto-approve!
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><strong>list</strong></td>
+                        <td>List all resources created for the registered KvBook.</td>
+                        <td>
+                            <pre>
+$ kaiac list
+Same output as terraform state list!
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><strong>output</strong></td>
+                        <td>Print the output for the registered KvBook.</td>
+                        <td>
+                            <pre>
+$ kaiac output
+Same output as terraform output!
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><strong>version</strong></td>
+                        <td>Print the KaiaC version.</td>
+                        <td>
+                            <pre>
+$ kaiac version
+KAIAC_VERSION = 0.0.7
+                                </pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pre></pre>
+        <a href="/kvbooks/vpc" class="btn btn-primary">To go deeper, just take a look at the VPC kvbook</a>
+    </div>
+</div>
+
+

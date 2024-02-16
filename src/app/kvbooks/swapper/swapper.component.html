@@ -1,0 +1,108 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook Swapper</h1>
+        <h5 class="card-subtitle text-muted">The Swapper KvBook allow you to manage swap space to you ubuntu EC2 instance with KaiaC.</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a Swapper KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-SWAPPER.png"
+        alt="kvbooks-SWAPPER"
+        width="80%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_AWS_REGION</td>
+                        <td>us-west-2</td>
+                        <td>The AWS region your resources will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_AWS_CRED_FILE_PATH</td>
+                        <td>~/.aws/credentials</td>
+                        <td>The AWS credentials file path</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_AWS_CRED_PROFILE</td>
+                        <td>default</td>
+                        <td>The AWS credentials profile</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>swapper</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>s3bucket001</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>GL_NAME</td>
+                        <td>demo1</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_STAGE</td>
+                        <td>staging</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>BE_EXISTING_EC2_NAME</td>
+                        <td>vmonly001-demo1-staging-1</td>
+                        <td>The Existing EC2 instance name to use</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>BE_EC2_SWAP_SIZE</td>
+                        <td>250M</td>
+                        <td>The ec2 instance swap size to set</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your EC2 Service console.</pre>
+        <pre>Connect through SSH to your instance and check the Swap using the command free -h</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to add swap with KaiaC :</pre>
+        <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="swapper"
+GL_NAMESPACE="swapper001"
+GL_NAME="demo1"
+GL_STAGE="staging"
+BE_EXISTING_EC2_NAME="vmonly001-demo1-staging-1"
+BE_EC2_SWAP_SIZE="250M"
+            
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

@@ -1,0 +1,122 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook Operations</h1>
+        <h5 class="card-subtitle text-muted">The Operations KvBook allow you to schedule a stop and restart of your EC2 instances. To achieve it KaiaC creates two AWS Systems Manager Maintenance Windows.</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with an Operations KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-OPERATIONS.png"
+        alt="kvbooks-OPERATIONS"
+        width="80%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_AWS_REGION</td>
+                        <td>us-west-2</td>
+                        <td>The AWS region your resources will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_AWS_CRED_FILE_PATH</td>
+                        <td>~/.aws/credentials</td>
+                        <td>The AWS credentials file path</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_AWS_CRED_PROFILE</td>
+                        <td>default</td>
+                        <td>The AWS credentials profile</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>operations</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>dbdump001</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>GL_NAME</td>
+                        <td>demo1</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_STAGE</td>
+                        <td>staging</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>GL_TARGET_DEPLOYMENT_TAG_VALUE</td>
+                        <td>alfresco-demo1-prod</td>
+                        <td>Target Deployment tag value used to create maintenance window</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>OP_MW_SCHEDULE_START</td>
+                        <td>cron(0 10 ? * MON-FRI *)</td>
+                        <td>The operations START maintenance window schedule</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>OP_MW_SCHEDULE_STOP</td>
+                        <td>cron(0 18 ? * MON-FRI *)</td>
+                        <td>The operations STOP maintenance window schedule</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>BE_LOCAL_SOURCE_FOLDER</td>
+                        <td>/kaiac/alfresco-demo1-prod</td>
+                        <td>The folder containing the application start script.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your Systems Manager console.</pre>
+        <pre>You should see your START and STOP maintenance windows tasks.</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to create Operations with KaiaC :</pre>
+        <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="operations"
+GL_NAMESPACE="opera001"
+GL_NAME="demo1"
+GL_STAGE="staging"
+GL_TARGET_DEPLOYMENT_TAG_VALUE="alfresco-demo1-prod"
+OP_MW_SCHEDULE_START="cron(0 10 ? * MON-FRI *)"
+OP_MW_SCHEDULE_STOP="cron(0 18 ? * MON-FRI *)"
+BE_LOCAL_SOURCE_FOLDER="/kaiac/alfresco-demo1-prod"
+            
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="card-body">
+        <h1>Install Kaiac</h1>
+        <h5 class="card-subtitle text-muted">To install Kaiac you just need an Ubuntu virtual machine and use the following commands.</h5>
+
+        <h3>Make sure you have some utilities:</h3>
+        <pre>$ sudo apt-get update && sudo apt-get install -y gnupg software-properties-common</pre>
+
+        <h3>Choose kaiac version you want:</h3>
+        <pre>$ VERSION="0.0.7"</pre>
+
+        <h3>Add the Kaiac GPG key:</h3>
+        <pre>$ wget -O- http://repo-kaiac-prod.skyscaledev.com/v$VERSION/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/kaiac-keyring.gpg</pre>
+
+        <h3>Add the official Kaiac Linux repository:</h3>
+        <pre>$ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/kaiac-keyring.gpg] http://repo-kaiac-prod.skyscaledev.com/v$VERSION/apt-repo stable main" </pre>
+        <pre> | sudo tee /etc/apt/sources.list.d/kaiac.list</pre>
+
+        <h3>Download and refresh package index:</h3>
+        <pre>$ sudo apt update</pre>
+
+        <h3>Finally install kaiac:</h3>
+        <pre>$ sudo apt-get install kaiac</pre>
+
+        <h1>Verify Kaiac</h1>
+        <h3>To verify your installation, use the following command:</h3>
+        <strong><pre>$ kaiac env</pre></strong>
+
+        <h3>The result should look like:</h3>
+        <pre>
+        VERSION   = 0.0.7
+        STATE     = bucket[Not defined] region[us-west-2] profile[default]
+        RESOURCES = region[us-west-2] profile[default]
+        KVBOOK    = Not defined
+        MODULE    = Not defined
+        CONTEXT   = namespace[Not defined] name[Not defined] stage[Not defined]
+        </pre>
+        <a href="/documentation" class="btn btn-primary">Use Kaiac now</a>
+    </div>
+</div>
+
+

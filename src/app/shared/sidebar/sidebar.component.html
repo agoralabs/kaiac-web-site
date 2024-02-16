@@ -1,0 +1,45 @@
+<nav class="sidebar-nav">
+    <ul id="sidebarnav">
+        <!-- First level menu -->
+        <li class="sidebar-item" [class.active]="showMenu === sidebarnavItem.title" *ngFor="let sidebarnavItem of sidebarnavItems"
+            [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
+            <div class="nav-small-cap" *ngIf="sidebarnavItem.extralink === true">{{sidebarnavItem.title}}</div>
+            <a class="sidebar-link waves-effect waves-dark" [routerLink]="sidebarnavItem.class === '' ? [sidebarnavItem.path] : null"
+                [ngClass]="[sidebarnavItem.class]" *ngIf="!sidebarnavItem.extralink;" (click)="addExpandClass(sidebarnavItem.title)"
+                [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
+                <i [ngClass]="[sidebarnavItem.icon]"></i>
+                <span class="hide-menu">{{sidebarnavItem.title}}</span>
+            </a>
+        </li>
+        <li class="text-center p-3 upgrade-btn">
+            <span class="badge bg-light text-dark d-block w-100">SOLUTIONS</span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/solutions/alfresco">ALFRESCO</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/solutions/moodle">MOODLE</a></span>
+        </li>
+        <li class="text-center p-3 upgrade-btn">
+            <span class="badge bg-light text-dark d-block w-100">KVBOOKS</span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/vpc">VPC</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/alb">Load Balancer</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/packer">Packer</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/vmgrouppublic">VM Group Public</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/vmonly">VM Only</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/tggroup">Target Group</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/cicd">CICD</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/dbrds">DB RDS</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/dbonly">DB Only</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/vm">VM</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/asgroup">Auto Scaling Group</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/s3website">S3 Website</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/dbloader">DB Loader</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/dbdumper">DB Dumper</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/ecrcopy">ECR Copy</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/lambda">Lambda</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/operations">Operations</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/s3bucket">S3 Bucket</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/swapper">Swapper</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/templater">Templater</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/vmgroup">VM Group</a></span>
+            <span class="mb-1 me-2 badge font-medium bg-light-info text-info w-100"><a class="nav-link" href="/kvbooks/vpcendpoint">VPC Endpoint</a></span>
+        </li>
+    </ul>
+</nav>

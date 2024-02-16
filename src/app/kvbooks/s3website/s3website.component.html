@@ -1,0 +1,129 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook S3 Website</h1>
+        <h5 class="card-subtitle text-muted">The S3 Website KvBook allow you to create with KaiaC a static website store in an S3 Bucket, a Cloudfront distribution with an existing SSL certificate provided by ACM (AWS Certificates Manager).</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with an S3 Website KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-S3WEBSITE.png"
+        alt="kvbooks-S3WEBSITE"
+        width="80%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_AWS_REGION</td>
+                        <td>us-west-2</td>
+                        <td>The AWS region your resources will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_AWS_CRED_FILE_PATH</td>
+                        <td>~/.aws/credentials</td>
+                        <td>The AWS credentials file path</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_AWS_CRED_PROFILE</td>
+                        <td>default</td>
+                        <td>The AWS credentials profile</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>s3website</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>s3website001</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>GL_NAME</td>
+                        <td>demo1</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_STAGE</td>
+                        <td>staging</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>GL_AWS_ROUTE53_DOMAIN</td>
+                        <td>skyscaledev.com</td>
+                        <td>The Route53 Domain name</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>GL_DNS_RECORD_TTL</td>
+                        <td>300</td>
+                        <td>The DNS record TTL</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>FE_CREATE_DNS</td>
+                        <td>true</td>
+                        <td>Flag to generate a Route53 DNS record for S3 website </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>FE_DNS</td>
+                        <td>demo1-s3website</td>
+                        <td>The S3 website domain name prefix</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>FE_S3_BUCKET_NAME</td>
+                        <td></td>
+                        <td>The S3 bucket name for S3 website</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your S3 Service console.</pre>
+        <pre>Your S3 Bucket should be created with the name specified for the website</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to create an S3 Website with KaiaC :</pre>
+        <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="s3bucket"
+GL_NAMESPACE="repo"
+GL_NAME="kaiac"
+GL_STAGE="prod"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+FE_CREATE_DNS="true"
+FE_DNS="repo-kaiac-prod"
+FE_S3_BUCKET_NAME="repo-kaiac-prod.skyscaledev.com"
+            
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

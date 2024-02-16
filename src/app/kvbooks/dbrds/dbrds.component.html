@@ -1,0 +1,206 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook DB RDS</h1>
+        <h5 class="card-subtitle text-muted">The DB RDS KvBook allow you to create a RDS instance with KaiaC. A security group will also be created and you can even add a Route 53 DNS record if you need a human readable database endpoint.</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a DB RDS KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-DBRDS.png"
+        alt="kvbooks-DBRDS"
+        width="70%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_AWS_REGION</td>
+                        <td>us-west-2</td>
+                        <td>The AWS region your resources will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>GL_AWS_CRED_FILE_PATH</td>
+                        <td>~/.aws/credentials</td>
+                        <td>The AWS credentials file path</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_AWS_CRED_PROFILE</td>
+                        <td>default</td>
+                        <td>The AWS credentials profile</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>dbrds</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>dbrds002</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>GL_NAME</td>
+                        <td>demo1</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>GL_STAGE</td>
+                        <td>staging</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_AWS_ROUTE53_DOMAIN</td>
+                        <td>skyscaledev.com</td>
+                        <td>The Route53 Domain name</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>GL_DNS_RECORD_TTL</td>
+                        <td>300</td>
+                        <td>The DNS record TTL</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>BE_CREATE_DNS</td>
+                        <td>true</td>
+                        <td>The flag to create or not a Route 53 DNS record</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>DB_HOST</td>
+                        <td>dbrds001-demo1-staging.skyscaledev.com</td>
+                        <td>The application database DNS alias</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>DB_ENGINE_NAME</td>
+                        <td>mariadb</td>
+                        <td>The db engine name (mariadb, mysql, sqlserver-ex)</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>DB_ENGINE_VERSION</td>
+                        <td>10.6.15</td>
+                        <td>The db engine version</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>DB_PARAM_GROUP</td>
+                        <td>custommariadb106</td>
+                        <td>The db parameter group name, should be created manually if it doesnt exist</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>DB_NAME</td>
+                        <td>dbrds001</td>
+                        <td>The application database name</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>DB_USERNAME</td>
+                        <td>admindbrds001</td>
+                        <td>The application database Admin username</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>DB_PASSWORD</td>
+                        <td>********</td>
+                        <td>The application database Admin user password</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>DB_PORT</td>
+                        <td>3306</td>
+                        <td>The application database port</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>DB_INSTANCE_CLASS</td>
+                        <td>db.t2.small</td>
+                        <td>The application database instance class</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>DB_STORAGE_TYPE</td>
+                        <td>gp2</td>
+                        <td>The storage type of the database</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>DB_STORAGE</td>
+                        <td>20</td>
+                        <td>The database storage in gigabytes</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>DB_STORAGE_MAX</td>
+                        <td>200</td>
+                        <td>The max database storage in gigabytes for rds storage autoscaling</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>DB_STORAGE_ENCRYPTED</td>
+                        <td>true</td>
+                        <td>The storage encryption flag</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your AWS RDS Service console.</pre>
+        <pre>Your RDS instance should be created with the name GL_NAMESPACE-GL_NAME-GL_STAGE-rds</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to create a DB RDS instance with KaiaC :</pre>
+        <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="dbrds"
+GL_NAMESPACE="dbrds002"
+GL_NAME="demo2"
+GL_STAGE="staging"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+DB_CREATE_DNS="true"
+DB_HOST="dbrds002-demo2-staging.skyscaledev.com"
+DB_ENGINE_NAME="mariadb"
+DB_ENGINE_VERSION="10.6.15"
+DB_PARAM_GROUP="custommariadb106"
+DB_NAME="dbrds002"
+DB_USERNAME="admindbrds002"
+DB_PASSWORD="to be defined"
+DB_PORT="3306"
+DB_INSTANCE_CLASS="db.t2.small"
+DB_STORAGE_TYPE="gp2"
+DB_STORAGE="20"
+DB_STORAGE_MAX="200"
+DB_STORAGE_ENCRYPTED="true"
+            
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

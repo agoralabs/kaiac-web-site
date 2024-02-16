@@ -1,0 +1,198 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook Target Group</h1>
+        <h5 class="card-subtitle text-muted">The Target Group KvBook allow you to create a target group with KaiaC.</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a Target Group KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-TGGROUP.png"
+        alt="kvbooks-TGGROUP"
+        width="60%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_AWS_REGION</td>
+                        <td>us-west-2</td>
+                        <td>The AWS region your resources will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>GL_AWS_CRED_FILE_PATH</td>
+                        <td>~/.aws/credentials</td>
+                        <td>The AWS credentials file path</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_AWS_CRED_PROFILE</td>
+                        <td>default</td>
+                        <td>The AWS credentials profile</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>tggroup</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>tggroup001</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>GL_NAME</td>
+                        <td>demo1</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>GL_STAGE</td>
+                        <td>staging</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_AWS_ROUTE53_DOMAIN</td>
+                        <td>agoralabs.org</td>
+                        <td>The Route53 Domain name</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>GL_DNS_RECORD_TTL</td>
+                        <td>300</td>
+                        <td>The DNS record TTL</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>GL_VPC_FILTER_NAME</td>
+                        <td>tag:Name</td>
+                        <td>The VPC filter name</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>GL_VPC_FILTER_VALUE</td>
+                        <td>vpc001-demo1-staging-vpc</td>
+                        <td>The VPC Name</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>BE_LOCAL_PORT</td>
+                        <td>8080</td>
+                        <td>The EC2 instance port</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>BE_CREATE_DNS</td>
+                        <td>true</td>
+                        <td>The flag to create or not a Route 53 DNS record</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>BE_DNS</td>
+                        <td>tggroup001-demo1-staging</td>
+                        <td>The ec2 instance domain name</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>BE_DOMAIN_NAME</td>
+                        <td>tggroup001-demo1-staging.agoralabs.org</td>
+                        <td>The private subnet1 cidr block</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>BE_EXISTING_ALB_NAME</td>
+                        <td>alb001-demo1-staging-lb</td>
+                        <td>Existing ALB name to use</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>BE_EXISTING_LISTENER_443</td>
+                        <td>true</td>
+                        <td>Existing listener to use or create if false</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>BE_ADD_SNI_CERT</td>
+                        <td>true</td>
+                        <td>Flag to add or not an sni certificate to ALB</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>GL_HEALTH_CHECK_PATH</td>
+                        <td>/</td>
+                        <td>The Application health check path in target group</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>BE_EC2_INSTANCE_COUNT</td>
+                        <td>2</td>
+                        <td>The ec2 instance count</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>BE_EXISTING_EC2_NAME</td>
+                        <td>vmgrpub001-demo1-staging</td>
+                        <td>Existing EC2 instance name</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>BE_ASG_EXISTING_NAME</td>
+                        <td>&nbsp;</td>
+                        <td>Existing autoscaling group name if the target group should forward to autoscaling group</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your AWS EC2 Service console.</pre>
+        <pre>Your Target Group should be created with the name GL_NAMESPACE-GL_NAME-GL_STAGE-tg</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to create a Target Group with KaiaC :</pre>
+        <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="tggroup"
+GL_NAMESPACE="tggroup001"
+GL_NAME="demo1"
+GL_STAGE="staging"
+GL_AWS_ROUTE53_DOMAIN="agoralabs.org"
+GL_DNS_RECORD_TTL="300"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="vpc001-demo1-staging-vpc"
+BE_LOCAL_PORT="8080"
+BE_CREATE_DNS="true"
+BE_DNS="tggroup001-demo1-staging"
+BE_DOMAIN_NAME="tggroup001-demo1-staging.agoralabs.org"
+BE_EXISTING_ALB_NAME="alb001-demo1-staging-lb"
+BE_EXISTING_LISTENER_443="true"
+BE_ADD_SNI_CERT="true"
+GL_HEALTH_CHECK_PATH="/"
+BE_EC2_INSTANCE_COUNT="2"
+BE_EXISTING_EC2_NAME="vmgrpub001-demo1-staging"
+BE_ASG_EXISTING_NAME=""
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

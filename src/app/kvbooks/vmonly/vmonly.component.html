@@ -1,0 +1,100 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook VMOnly</h1>
+        <h5 class="card-subtitle text-muted">The VMOnly KvBook allow you to create an EC2 instance with KaiaC. This EC2 instance will be created in your default region, default vpc and default public subnet</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a VMOnly KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-VMONLY.png"
+        alt="kvbooks-VMONLY"
+        width="60%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>vmonly</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>vm001</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_NAME</td>
+                        <td>demo1</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_STAGE</td>
+                        <td>staging</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>BE_PATH_EC2_PUBKEY</td>
+                        <td>~/.ssh/id_rsa.pub</td>
+                        <td>The ec2 instance public key path</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>BE_EC2_TYPE</td>
+                        <td>t2.micro</td>
+                        <td>The EC2 instance type</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>BE_EC2_VOLUME_SIZE</td>
+                        <td>20</td>
+                        <td>The EC2 instance root volume size en giga</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>BE_AMI_NAME</td>
+                        <td>ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230919</td>
+                        <td>The ec2 instance Amazon AMI name</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your AWS EC2 Service console.</pre>
+        <pre>Your EC2 instance should be created with the name GL_NAMESPACE-GL_NAME-GL_STAGE-ec2</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to create an EC2 instance with KaiaC :</pre>
+        <pre>
+GL_KAIAC_MODULE="vmonly"
+GL_NAMESPACE="vm001"
+GL_NAME="demo1"
+GL_STAGE="staging"
+BE_PATH_EC2_PUBKEY="~/.ssh/id_rsa.pub"
+BE_EC2_TYPE="t2.micro"
+BE_EC2_VOLUME_SIZE="20"
+BE_AMI_NAME="ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230919"
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+
