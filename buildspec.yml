@@ -18,5 +18,6 @@ phases:
       - cd dist
       - ls -la
       - aws s3 sync . s3://$TF_VAR_ENV_APP_FE_S3_BUCKET_NAME --delete
-      - aws cloudfront create-invalidation --distribution-id $(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items[?@ == '$TF_VAR_ENV_APP_FE_S3_BUCKET_NAME']].Id | [0]" --output text) --paths "/*"
+      - distribution_id=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items[?@ == '$TF_VAR_ENV_APP_FE_S3_BUCKET_NAME']].Id | [0]" --output text)
+      - aws cloudfront create-invalidation --distribution-id $distribution_id --paths "/*"
 
