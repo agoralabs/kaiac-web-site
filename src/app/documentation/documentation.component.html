@@ -131,12 +131,13 @@
                         <td>
                             <pre>
 $ kaiac env
-VERSION   = 0.0.7
-STATE     = bucket[Not defined] region[us-west-2] profile[default]
-RESOURCES = region[us-west-2] profile[default]
-KVBOOK    = Not defined
-MODULE    = Not defined
-CONTEXT   = namespace[Not defined] name[Not defined] stage[Not defined]
+VERSION     = 0.0.8
+STATE       = bucket[Not defined] region[us-west-2] profile[default]
+RESOURCES   = region[us-west-2] profile[default]
+COMPOSITION = Not defined
+KVBOOK      = Not defined
+MODULE      = Not defined
+CONTEXT     = namespace[Not defined] name[Not defined] stage[Not defined]
                                 </pre>
                         </td>
                     </tr>
@@ -240,7 +241,52 @@ Same output as terraform output!
                         <td>
                             <pre>
 $ kaiac version
-KAIAC_VERSION = 0.0.7
+KAIAC_VERSION = 0.0.8
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><strong>compose</strong></td>
+                        <td>Register a KvBook orchestration file.</td>
+                        <td>
+                            <pre>
+$ kaiac compose /alfresco_composition.json
+Composition registred!
+First KvBook /alfresco/1_vpc.cfg registred
+                                </pre>
+
+Contents of /alfresco_composition.json orchestration file
+                                <pre>
+{{ '{' }}                                
+    "1": "/alfresco/1_vpc.cfg",
+    "2": "/alfresco/2_vm.cfg",
+    "3": "/alfresco/3_cicd.cfg",
+    "4": "/alfresco/4_lambda.cfg",
+    "5": "/alfresco/5_operations.cfg",
+    "6": "/alfresco/6_templater.cfg"
+{{ '}' }}</pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><strong>next</strong></td>
+                        <td>Register the next KvBook of the Composition file.</td>
+                        <td>
+                            <pre>
+$ kaiac next
+Next KvBook /alfresco/2_vm.cfg registred!
+                                </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><strong>back</strong></td>
+                        <td>Register the previous KvBook of the Composition file.</td>
+                        <td>
+                            <pre>
+$ kaiac back
+Previous KvBook /alfresco/5_operations.cfg registred!
                                 </pre>
                         </td>
                     </tr>

@@ -7,7 +7,7 @@
         <pre>$ sudo apt-get update && sudo apt-get install -y gnupg software-properties-common</pre>
 
         <h3>Choose kaiac version you want:</h3>
-        <pre>$ VERSION="0.0.7"</pre>
+        <pre>$ VERSION="0.0.8"</pre>
 
         <h3>Add the Kaiac GPG key:</h3>
         <pre>$ wget -O- http://repo-kaiac-prod.skyscaledev.com/v$VERSION/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/kaiac-keyring.gpg</pre>
@@ -28,12 +28,13 @@
 
         <h3>The result should look like:</h3>
         <pre>
-        VERSION   = 0.0.7
-        STATE     = bucket[Not defined] region[us-west-2] profile[default]
-        RESOURCES = region[us-west-2] profile[default]
-        KVBOOK    = Not defined
-        MODULE    = Not defined
-        CONTEXT   = namespace[Not defined] name[Not defined] stage[Not defined]
+        VERSION     = 0.0.8
+        STATE       = bucket[Not defined] region[us-west-2] profile[default]
+        RESOURCES   = region[us-west-2] profile[default]
+        COMPOSITION = Not defined
+        KVBOOK      = Not defined
+        MODULE      = Not defined
+        CONTEXT     = namespace[Not defined] name[Not defined] stage[Not defined]
         </pre>
         <a href="/documentation" class="btn btn-primary">Use Kaiac now</a>
     </div>
