@@ -1,10 +1,187 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">About Monster Angular</h4>
-        <h5 class="card-subtitle text-muted">Angular 16 CLI Admin Template, Light & Dark Versions, Landing Page, 6 Demo Variations, 3 Dashboard Variations, 25+ Angular Components, 90+ Pages, 2000+ Font Icons & much more...</h5>
-        <div class="my-4">
-            <img src="https://www.wrappixel.com/wp-content/uploads/edd/2020/04/monster-angular-admin-y.jpg" class="img-fluid" alt="xtreme-ang" />
-        </div>        
-        <a href="htthttps://www.wrappixel.com/templates/monster-angular-dashboard/" class="btn btn-primary">Check Pro Version</a>
+        <h1>MOODLE Use Case</h1>
+        <h4 class="card-subtitle text-muted">The Moodle Use Case show you how you can manage a Moodle Demo platform at low costs with KaiaC on AWS.</h4>
+        
+        <h2>Requirements</h2>
+        <h5>
+            We need an Moodle demo platform deployed on Amazon Web Services Cloud (AWS) to showcase the capabilities of Moodle is a Learning Platform or course management system (CMS) and also the simplicity of KaiaC Tool.
+            This platform will provide a simulated environment for users to explore key features and functionalities of Moodle's course management system.
+            This use case is useful for DevOps since it also expose the capabilities of KaiaC.
+        </h5>
+
+        <h5>
+            <strong>Infrastructure Requirements</strong>
+            <ul>
+                <li>The Demo platform will utilize AWS infrastructure for reliability and ease of management.</li>
+                <li>The Demo platform deployment will utilize AWS services such as EC2 (Elastic Compute Cloud) for virtual servers.</li>
+                <li>The Demo platform should be accessed using a user friendly URL.</li>
+                <li>The Demo platform manipulations should be persisted on demand.</li>
+                <li>It should be easy to deploy as many demo environments needed.</li>
+            </ul>
+        </h5>
+
+        <h5>
+            <strong>Software Requirements</strong>
+            <ul>
+                <li>The Demo platform should be easy to upgrade or downgrade Moodle versions deployed on the Demo platform.</li>
+                <li>The Demo platform should use Docker images.</li>
+
+            </ul>
+        </h5>
+
+        <h2>Solution Architecture</h2>
+        <pre>This is the solution architecture of this Moodle Demo platform:</pre>
+        <pre>
+        <img
+        src="assets/images/galery/solutions/solutions-MOODLE.png"
+        alt="solutions-MOODLE"
+        width="80%"/>
+        </pre>
+
+        <h2>Modules KaiaC utilisés</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Module</th>
+                        <th class="text-dark font-medium fs-4">KvBook</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>vpc</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="vpc"
+GL_NAMESPACE="moodle"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_AWS_AZS="us-west-2a,us-west-2b"
+GL_VPC_CREATE="true"
+GL_VPC_ENABLE_NAT_GATEWAY="false"
+GL_VPC_SINGLE_NAT_GATEWAY="true"
+GL_VPC_USE_PRIVATE_SUBNETS="false"
+GL_VPC_CIDR="10.0.0.0/16"
+GL_VPC_CIDR_SUBNET1="10.0.101.0/24"
+GL_VPC_CIDR_SUBNET2="10.0.102.0/24"
+</pre>
+                        </td>
+                        <td>The VPC where Moodle instance will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>alb</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="alb"
+GL_NAMESPACE="moodle"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="moodle-demo1-prod-vpc"
+GL_VPC_SUBNET_FILTER_NAME="tag:Name"
+GL_VPC_SUBNET_FILTER_VALUE1="moodle-demo1-prod-public-subnet1"
+GL_VPC_SUBNET_FILTER_VALUE2="moodle-demo1-prod-public-subnet2"
+</pre>
+                        </td>
+                        <td>The Application LoadBalancer</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>vmgrouppublic</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="vmgrouppublic"
+GL_NAMESPACE="moodle"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="moodle-demo1-prod-vpc"
+GL_VPC_SUBNET_FILTER_NAME="tag:Name"
+GL_VPC_SUBNET_FILTER_VALUE1="moodle-demo1-prod-public-subnet1"
+GL_VPC_SUBNET_FILTER_VALUE2="moodle-demo1-prod-public-subnet2"
+GL_VPC_USE_PRIVATE_SUBNETS="false"
+BE_PATH_EC2_PUBKEY="~/.ssh/id_rsa.pub"
+BE_EC2_TYPE="t3.medium"
+BE_EC2_INSTANCE_COUNT="1"
+BE_EC2_VOLUME_SIZE="20"
+BE_LOCAL_PORT="8080"
+BE_AMI_NAME="ubuntu-laravel-ami-docker"
+BE_CREATE_DNS="true"
+BE_DNS="moodle-demo1-prod"
+BE_DOMAIN_NAME="moodle-demo1-prod.skyscaledev.com"
+BE_EXISTING_ALB_NAME="moodle-demo1-prod-lb"
+BE_EXISTING_LISTENER_443="false"
+BE_ADD_SNI_CERT="true"
+GL_HEALTH_CHECK_PATH="/"
+</pre>
+                        </td>
+                        <td>The EC2 instance, inside a target group</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>cicd</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="cicd"
+GL_SCRIPT_MODE="cloud"
+GL_NAMESPACE="moodle"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_AWS_CODEBUILD_IMG="aws/codebuild/standard:6.0"
+BE_EXISTING_EC2_DEPLOYMENT_GROUP="moodle-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+GL_CSTAR_CONN_NAME="github_agora_conn"
+BE_FULL_REPOSITORY_ID="agoralabs/demo-kaiac-moodle"
+BE_SOURCE_BRANCH_NAME="main"
+BE_PIPELINE_BUCKET="moodle-demo1-prod"
+GL_DEPLOY_STAGE_ENABLED="true"
+GL_INPUT_CONFIG_FILE="/root/kaiac/kvbooks/moodle/4_cicd_config.json"
+</pre>
+Environment variables in 4_cicd_config.json used by the pipeline steps : 
+                                <pre>
+{{ '{' }}                                
+    "TF_VAR_ENV_APP_GL_SCRIPT_MODE": "cloud",
+    "TF_VAR_ENV_APP_GL_NAME": "demo1",
+    "TF_VAR_ENV_APP_GL_STAGE": "prod",
+    "TF_VAR_ENV_APP_BE_DOMAIN_NAME": "moodle-demo1-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_URL": "htpps://moodle-demo1-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_LOCAL_PORT": "8080",
+    "TF_VAR_ENV_APP_GL_DOCKER_REPOSITORY": "docker.io",
+    "TF_VAR_ENV_APP_BE_LOCAL_SOURCE_FOLDER": "/kaiac/moodle",
+    "TF_VAR_ENV_APP_GL_AWS_REGION_ECR": "us-west-2"
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The CICD pipeline to redeploy your Moodle instance</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
     </div>
 </div>
+
+

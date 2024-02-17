@@ -1,10 +1,38 @@
 <div class="card">
     <div class="card-body">
-        <h1>Solution ALFRESCO</h1>
-        <h5 class="card-subtitle text-muted">The Auto Scaling Group KvBook allow you to create an Auto Scaling group behind an exisiting ALB with EC2 instances with KaiaC.</h5>
+        <h1>ALFRESCO Use Case</h1>
+        <h4 class="card-subtitle text-muted">The Alfresco Use Case show you how you can manage an Alfresco Demo platform at low costs with KaiaC on AWS.</h4>
+        
+        <h2>Requirements</h2>
+        <h5>
+            We need an Alfresco demo platform deployed on Amazon Web Services Cloud (AWS) to showcase the capabilities of Alfresco Content Services (ACS) and also the simplicity of KaiaC Tool.
+            This platform will provide a simulated environment for users to explore key features and functionalities of Alfresco's document management and business process management solutions.
+            This use case is useful for DevOps since it also expose the capabilities of KaiaC.
+        </h5>
 
-        <h2>Design</h2>
-        <pre>This is what you can create with an Auto Scaling Group KvBook</pre>
+        <h5>
+            <strong>Infrastructure Requirements</strong>
+            <ul>
+                <li>The Demo platform will utilize AWS infrastructure for reliability and ease of management.</li>
+                <li>The Demo platform deployment will utilize AWS services such as EC2 (Elastic Compute Cloud) for virtual servers.</li>
+                <li>The Demo platform should be accessed using a user friendly URL.</li>
+                <li>The Demo platform manipulations should be persisted on demand.</li>
+                <li>The Demo platform should be available only on working days between 08AM and 6PM.</li>
+                <li>It should be easy to deploy as many demo environments needed.</li>
+            </ul>
+        </h5>
+
+        <h5>
+            <strong>Software Requirements</strong>
+            <ul>
+                <li>The Demo platform should be easy to upgrade or downgrade Alfresco versions deployed on the Demo platform.</li>
+                <li>The Demo platform should use Docker images.</li>
+
+            </ul>
+        </h5>
+
+        <h2>Solution Architecture</h2>
+        <pre>This is the solution architecture of this Alfresco Demo platform:</pre>
         <pre>
         <img
         src="assets/images/galery/solutions/solutions-ALFRESCO.png"
@@ -12,261 +40,199 @@
         width="80%"/>
         </pre>
 
-        <h2>Key/Value parameters</h2>
+        <h2>Modules KaiaC utilisés</h2>
         <div class="table-responsive">
             <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
                 <thead>
                     <tr>
                         <th class="text-dark font-medium fs-4">#</th>
-                        <th class="text-dark font-medium fs-4">Name</th>
-                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Module</th>
+                        <th class="text-dark font-medium fs-4">KvBook</th>
                         <th class="text-dark font-medium fs-4">Description</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>GL_AWS_REGION</td>
-                        <td>us-west-2</td>
-                        <td>The AWS region your resources will be deployed</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>GL_AWS_CRED_FILE_PATH</td>
-                        <td>~/.aws/credentials</td>
-                        <td>The AWS credentials file path</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>GL_AWS_CRED_PROFILE</td>
-                        <td>default</td>
-                        <td>The AWS credentials profile</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>GL_KAIAC_MODULE</td>
-                        <td>asgroup</td>
-                        <td>The name of kaiac module to run</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>GL_NAMESPACE</td>
-                        <td>vmgrpub001</td>
-                        <td>The application global resources namespace</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>GL_NAME</td>
-                        <td>demo1</td>
-                        <td>The application name</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>GL_STAGE</td>
-                        <td>staging</td>
-                        <td>The application stage name</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>GL_AWS_AZS</td>
-                        <td>us-west-2a,us-west-2b</td>
-                        <td>The AWS azs your resources will be deployed</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>GL_AWS_ROUTE53_DOMAIN</td>
-                        <td>skyscaledev.com</td>
-                        <td>The Route53 Domain name</td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>GL_DNS_RECORD_TTL</td>
-                        <td>300</td>
-                        <td>The DNS record TTL</td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>GL_VPC_FILTER_NAME</td>
-                        <td>tag:Name</td>
-                        <td>The VPC filter name</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>GL_VPC_FILTER_VALUE</td>
-                        <td>vpc001-demo1-staging-vpc</td>
-                        <td>The VPC Name</td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>GL_VPC_SUBNET_FILTER_NAME</td>
-                        <td>tag:Name</td>
-                        <td>The Public Subnet filter name subnet-id or tag:Name</td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>GL_VPC_SUBNET_FILTER_VALUE1</td>
-                        <td>vpc001-demo1-staging-public-subnet1</td>
-                        <td>The Public Subnet1 filter value eg subnet name</td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>GL_VPC_SUBNET_FILTER_VALUE2</td>
-                        <td>vpc001-demo1-staging-public-subnet2</td>
-                        <td>The Public Subnet2 filter value eg subnet name</td>
-                    </tr>
-                    <tr>
-                        <td>16</td>
-                        <td>GL_VPC_SUBNET_PRV_FILTER_VALUE1</td>
-                        <td>vpc001-demo1-staging-private-subnet1</td>
-                        <td>The Private Subnet1 filter value eg subnet name</td>
-                    </tr>
-                    <tr>
-                        <td>17</td>
-                        <td>GL_VPC_SUBNET_PRV_FILTER_VALUE2</td>
-                        <td>vpc001-demo1-staging-private-subnet2</td>
-                        <td>The Private Subnet2 filter value eg subnet name</td>
-                    </tr>
-                    <tr>
-                        <td>18</td>
-                        <td>GL_VPC_SUBNET_PRV_FILTER_VALUE2</td>
-                        <td>vpc001-demo1-staging-private-subnet2</td>
-                        <td>The Private Subnet2 filter value eg subnet name</td>
-                    </tr>
-                    <tr>
-                        <td>19</td>
-                        <td>GL_VPC_USE_PRIVATE_SUBNETS</td>
-                        <td>true</td>
-                        <td>The flag to use private subnets if true else public subnets</td>
-                    </tr>
-                    <tr>
-                        <td>20</td>
-                        <td>BE_PATH_EC2_PUBKEY</td>
-                        <td>~/.ssh/id_rsa.pub</td>
-                        <td>The ec2 instance public key path</td>
-                    </tr>
-                    <tr>
-                        <td>21</td>
-                        <td>BE_EC2_TYPE</td>
-                        <td>t2.micro</td>
-                        <td>The EC2 instance type</td>
-                    </tr>
-                    <tr>
-                        <td>22</td>
-                        <td>BE_ASG_DESIRED_CAPACITY</td>
-                        <td>2</td>
-                        <td>The Autoscalling desired capacity</td>
-                    </tr>
-                    <tr>
-                        <td>23</td>
-                        <td>BE_ASG_MIN_SIZE</td>
-                        <td>1</td>
-                        <td>The Autoscalling min size</td>
-                    </tr>
-                    <tr>
-                        <td>23</td>
-                        <td>BE_ASG_MAX_SIZE</td>
-                        <td>4</td>
-                        <td>The Autoscalling max size</td>
-                    </tr>
-                    <tr>
-                        <td>24</td>
-                        <td>BE_EC2_VOLUME_SIZE</td>
-                        <td>20</td>
-                        <td>The EC2 instance root volume size en giga</td>
-                    </tr>
-                    <tr>
-                        <td>25</td>
-                        <td>BE_LOCAL_PORT</td>
-                        <td>8080</td>
-                        <td>The EC2 instance local port</td>
-                    </tr>
-                    <tr>
-                        <td>26</td>
-                        <td>BE_AMI_NAME</td>
-                        <td>ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230919</td>
-                        <td>The ec2 instance Amazon AMI name</td>
-                    </tr>
-                    <tr>
-                        <td>27</td>
-                        <td>BE_CREATE_DNS</td>
-                        <td>true</td>
-                        <td>The flag to create or not a Route 53 DNS record</td>
-                    </tr>
-                    <tr>
-                        <td>28</td>
-                        <td>BE_DNS</td>
-                        <td>asgroup001-demo1-staging</td>
-                        <td>The ec2 instance domain name</td>
-                    </tr>
-                    <tr>
-                        <td>29</td>
-                        <td>BE_DOMAIN_NAME</td>
-                        <td>asgroup001-demo1-staging.skyscaledev.com</td>
-                        <td>The private subnet1 cidr block</td>
-                    </tr>
-                    <tr>
-                        <td>30</td>
-                        <td>BE_EXISTING_ALB_NAME</td>
-                        <td>alb001-demo1-staging-lb</td>
-                        <td>Existing ALB name to use</td>
-                    </tr>
-                    <tr>
-                        <td>31</td>
-                        <td>BE_EXISTING_LISTENER_443</td>
-                        <td>false</td>
-                        <td>Existing listener to use or create if false</td>
-                    </tr>
-                    <tr>
-                        <td>32</td>
-                        <td>BE_ADD_SNI_CERT</td>
-                        <td>true</td>
-                        <td>Flag to add or not an sni certificate to ALB</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h2>Results</h2>
-        <pre>Go to your AWS EC2 Service console.</pre>
-        <pre>Your Auto Scaling group and EC2 instances should be created</pre>
-
-        <h2>Try</h2>
-        <pre>You can use this KvBook to try to create an Auto Scaling group with KaiaC :</pre>
-        <pre>
-
+                        <td><strong>vpc</strong></td>
+                        <td>
+                            <pre>
 GL_AWS_REGION="us-west-2"
 GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
 GL_AWS_CRED_PROFILE="default"
-GL_KAIAC_MODULE="asgroup"
-GL_NAMESPACE="asgroup001"
+GL_KAIAC_MODULE="vpc"
+GL_NAMESPACE="alfresco"
 GL_NAME="demo1"
-GL_STAGE="staging"
+GL_STAGE="prod"
 GL_AWS_AZS="us-west-2a,us-west-2b"
+GL_VPC_CREATE="true"
+GL_VPC_ENABLE_NAT_GATEWAY="false"
+GL_VPC_SINGLE_NAT_GATEWAY="true"
+GL_VPC_USE_PRIVATE_SUBNETS="false"
+GL_VPC_CIDR="10.0.0.0/16"
+GL_VPC_CIDR_SUBNET1="10.0.101.0/24"
+GL_VPC_CIDR_SUBNET2="10.0.102.0/24"
+</pre>
+                        </td>
+                        <td>The VPC where Alfresco instance will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>vm</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="vm"
+GL_NAMESPACE="alfresco"
+GL_NAME="demo1"
+GL_STAGE="prod"
 GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
 GL_DNS_RECORD_TTL="300"
 GL_VPC_FILTER_NAME="tag:Name"
-GL_VPC_FILTER_VALUE="vpc001-demo1-staging-vpc"
+GL_VPC_FILTER_VALUE="alfresco-demo1-prod-vpc"
 GL_VPC_SUBNET_FILTER_NAME="tag:Name"
-GL_VPC_SUBNET_FILTER_VALUE1="vpc001-demo1-staging-public-subnet1"
-GL_VPC_SUBNET_FILTER_VALUE2="vpc001-demo1-staging-public-subnet2"
-GL_VPC_SUBNET_PRV_FILTER_VALUE1="vpc001-demo1-staging-private-subnet1"
-GL_VPC_SUBNET_PRV_FILTER_VALUE2="vpc001-demo1-staging-private-subnet2"
-GL_VPC_USE_PRIVATE_SUBNETS="true"
-BE_PATH_EC2_PUBKEY="/root/profiles/asgroup001/ssh/SSHPUBKEY"
-BE_EC2_TYPE="t2.micro"
-BE_ASG_DESIRED_CAPACITY="1"
-BE_ASG_MIN_SIZE="1"
-BE_ASG_MAX_SIZE="4"
+GL_VPC_SUBNET_FILTER_VALUE1="alfresco-demo1-prod-public-subnet1"
+BE_PATH_EC2_PUBKEY="~/.ssh/id_rsa.pub"
+BE_EC2_TYPE="t3.medium"
 BE_EC2_VOLUME_SIZE="20"
 BE_LOCAL_PORT="8080"
 BE_AMI_NAME="ubuntu-laravel-ami-docker"
 BE_CREATE_DNS="true"
-BE_DNS="asgroup001-demo1-staging"
-BE_DOMAIN_NAME="asgroup001-demo1-staging.skyscaledev.com"
-BE_EXISTING_ALB_NAME="alb001-demo1-staging-lb"
-BE_EXISTING_LISTENER_443="false"
-BE_ADD_SNI_CERT="true"
-            
+BE_DNS="alfresco-demo1-prod"
+</pre>
+                        </td>
+                        <td>The EC2 Alfresco instance</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>cicd</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="cicd"
+GL_SCRIPT_MODE="cloud"
+GL_NAMESPACE="alfresco"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_AWS_CODEBUILD_IMG="aws/codebuild/standard:5.0"
+BE_EXISTING_EC2_DEPLOYMENT_GROUP="alfresco-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+GL_CSTAR_CONN_NAME="github_agora_conn"
+BE_FULL_REPOSITORY_ID="agoralabs/demo-kaiac-alfresco-s3"
+BE_SOURCE_BRANCH_NAME="main"
+BE_PIPELINE_BUCKET="alfresco-demo1-prod"
+GL_DEPLOY_STAGE_ENABLED="true"
+GL_INPUT_CONFIG_FILE="/root/kaiac/kvbooks/alfresco/3_cicd_config.json"
+</pre>
+Environment variables in 3_cicd_config.json used by the pipeline steps :
+                                <pre>
+{{ '{' }}                                
+    "TF_VAR_ENV_APP_GL_SCRIPT_MODE": "clouddocker",
+    "TF_VAR_ENV_APP_GL_NAME": "demo1",
+    "TF_VAR_ENV_APP_GL_STAGE": "prod",
+    "TF_VAR_ENV_APP_BE_DOMAIN_NAME": "alfresco-demo1-prod",
+    "TF_VAR_ENV_APP_BE_URL": "http://alfresco-demo1-prod.skyscaledev.com:8080",
+    "TF_VAR_ENV_APP_BE_LOCAL_PORT": "8080",
+    "TF_VAR_ENV_APP_BE_LOCAL_SOURCE_FOLDER": "/kaiac/alfresco-demo1-prod",
+    "TF_VAR_ENV_APP_GL_DEVOPS_BACKUP_FILENAME": "alfresco-demo1-prod.zip",
+    "TF_VAR_ENV_APP_GL_DEVOPS_BACKUP_S3_BUCKET": "kaiac.agoralabs.org",
+    "TF_VAR_ENV_APP_GL_DEVOPS_BACKUP_AUTO": "NO",
+    "TF_VAR_ENV_APP_GL_DEVOPS_RESTORE_AUTO": "NO",
+    "TF_VAR_ENV_APP_GL_AWS_REGION_ECR": "us-west-2",
+    "TF_VAR_ENV_APP_GL_DOCKER_REPOSITORY": "docker.io",
+    "TF_VAR_ENV_APP_GL_REPO_ALFRESCO_CRC_TAG": "7.4.1",
+    "TF_VAR_ENV_APP_GL_REPO_ALFRESCO_SEARCH_SVC_TAG": "2.0.8",
+    "TF_VAR_ENV_APP_GL_REPO_ALFRESCO_SHARE_TAG": "7.4.1",
+    "TF_VAR_ENV_APP_GL_REPO_ALFRESCO_CONTENT_APP_TAG": "4.1.0",
+    "TF_VAR_ENV_APP_GL_REPO_ALFRESCO_POSTGRE_TAG": "14.4",
+    "TF_VAR_ENV_APP_GL_REPO_MARIA_DB_TAG": "10.5",
+    "TF_VAR_ENV_APP_GL_REPO_ALFRESCO_TFRM_CORE_AIO_TAG": "4.0.0",
+    "TF_VAR_ENV_APP_GL_REPO_ALFRESCO_ACTIVEMQ_TAG": "5.17.1-jre11-rockylinux8"
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The CICD pipeline to redeploy your Alfresco instance</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>lambda</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="lambda"
+GL_NAMESPACE="alfresco"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+LA_NAME="send_command"
+LA_RUNTIME="nodejs16.x"
+LA_TIMEOUT="30"
+LA_STAGE="prod"
+LA_APIGW_SUBDOMAIN="lambda"
+LA_SOURCE_DIR="/root/demo-kaiac-lambda"
+LA_SOURCE_REPO="git@github.com:agoralabs/demo-kaiac-lambda.git"
+</pre>
+                        </td>
+                        <td>The Lambda function used to manage Alfresco from your local PC.</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>operations</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="operations"
+GL_NAMESPACE="alfresco"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_TARGET_DEPLOYMENT_TAG_VALUE="alfresco-demo1-prod"
+OP_MW_SCHEDULE_START="cron(0 10 ? * MON-FRI *)"
+OP_MW_SCHEDULE_STOP="cron(0 18 ? * MON-FRI *)"
+BE_LOCAL_SOURCE_FOLDER="/kaiac/alfresco-demo1-prod"
+</pre>
+                        </td>
+                        <td>The Maintenance window used to stop and start Alfresco instances at specific hours.</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>templater</strong></td>
+                        <td>
+                            <pre>
+GL_AWS_REGION="us-west-2"
+GL_AWS_CRED_FILE_PATH="~/.aws/credentials"
+GL_AWS_CRED_PROFILE="default"
+GL_KAIAC_MODULE="templater"
+GL_NAMESPACE="alfresco"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_INPUT_CONFIG_FILE="/root/kaiac/kvbooks/alfresco/6_templater_config.json"
+GL_INPUT_TEMPLATE_FILE="/root/kaiac/templates/scripts/manager.sh.template"
+GL_OUTPUT_GENERATED_FILE="/root/manager.sh"
+</pre>
+                        </td>
+                        <td>The manager.sh script which an Alfresco admin will use to manage the Demo platform.</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Screenshots</h2>
+        <pre>Some screenshots of this Alfresco Demo platform:</pre>
+        <pre>
+        <img
+        src="assets/images/galery/solutions/solutions-ALFRESCO-screenshot.png"
+        alt="solutions-ALFRESCO-screenshot"
+        width="80%"/>
         </pre>
 
         <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
