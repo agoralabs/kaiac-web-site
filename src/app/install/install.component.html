@@ -1,25 +1,31 @@
 <div class="card">
     <div class="card-body">
         <h1>Install KaiaC</h1>
-        <h5 class="card-subtitle text-muted">To install KaiaC you just need an Ubuntu virtual machine and use the following commands.</h5>
 
-        <h3>Make sure you have some utilities:</h3>
+        <h3>1) Make sure you have a Debian virtual with AWS CLI :</h3>
+        <h4 class="card-subtitle text-muted">KaiaC is released as a Debian package, so to work properly, KaiaC needs the following.</h4>
+        <ul>
+            <li><strong>A Debian or Ubuntu virtual machine : </strong> You can use Vagrant and VirtualBox to easily create a virtual machine inside your current PC. Click on this link <a href="https://www.openlogic.com/blog/how-use-vagrant-and-virtualbox" target="_blank">How-use-Vagrant-and-VirtualBox</a>. For Ubuntu, you can use this <a href="https://app.vagrantup.com/bento/boxes/ubuntu-20.04" target="_blank">Vagrant Box</a></li>
+            <li><strong>AWS CLI installed on the virtual machine : </strong> To install or update to the latest version of the AWS CLI, Click on this link <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html" target="_blank">Getting-started-install</a></li>
+        </ul>
+
+        <h3>2) Make sure you have some utilities : </h3>
         <pre>$ sudo apt-get update && sudo apt-get install -y gnupg software-properties-common</pre>
 
-        <h3>Choose kaiac version you want:</h3>
+        <h3>3) Choose KaiaC version you want :</h3>
         <pre>$ VERSION="0.0.8"</pre>
 
-        <h3>Add the KaiaC GPG key:</h3>
+        <h3>4) Add the KaiaC GPG key :</h3>
         <pre>$ wget -O- http://repo-kaiac-prod.skyscaledev.com/v$VERSION/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/kaiac-keyring.gpg</pre>
 
-        <h3>Add the official KaiaC Linux repository:</h3>
+        <h3>5) Add the official KaiaC Linux repository :</h3>
         <pre>$ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/kaiac-keyring.gpg] http://repo-kaiac-prod.skyscaledev.com/v$VERSION/apt-repo stable main" </pre>
         <pre> | sudo tee /etc/apt/sources.list.d/kaiac.list</pre>
 
-        <h3>Download and refresh package index:</h3>
+        <h3>6) Download and refresh package index :</h3>
         <pre>$ sudo apt update</pre>
 
-        <h3>Finally install kaiac:</h3>
+        <h3>7) Finally install KaiaC :</h3>
         <pre>$ sudo apt-get install kaiac</pre>
 
         <h1>Verify KaiaC</h1>
