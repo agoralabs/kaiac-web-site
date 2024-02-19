@@ -1,18 +1,28 @@
 <div class="card">
     <div class="card-body">
         <h1>KaiaC Documentation</h1>
-        <h3 class="card-subtitle text-muted">Kaiac lets you create AWS cloud resources using just simple key/values configuration files</h3>
+        <h3 class="card-subtitle text-muted">KaiaC lets you create AWS cloud resources using just simple key/values configuration files</h3>
 
         <pre>
         </pre>
-        <h2>1) But you first need an S3 bucket !</h2>
-        <h4 class="card-subtitle text-muted">To work properly, Kaiac use an aws s3 backend to store the state of your infrastructure.</h4>
+        <h2>1) What you must have ? </h2>
+        <h4 class="card-subtitle text-muted">KaiaC is released as a Debian package, so to work properly, KaiaC needs the following.</h4>
+        <ul>
+            <li><strong>A Debian or Ubuntu virtual machine : </strong> You can use Vagrant and VirtualBox to easily create a virtual machine inside your current PC. Click on this link <a href="https://www.openlogic.com/blog/how-use-vagrant-and-virtualbox" target="_blank">How-use-Vagrant-and-VirtualBox</a>. For Ubuntu, you can use this <a href="https://app.vagrantup.com/bento/boxes/ubuntu-20.04" target="_blank">Vagrant Box</a></li>
+            <li><strong>AWS CLI installed on the virtual machine : </strong> To install or update to the latest version of the AWS CLI, Click on this link <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html" target="_blank">Getting-started-install</a></li>
+        </ul>
+
+
+        <pre>
+        </pre>
+        <h2>2) But you also need an S3 bucket !</h2>
+        <h4 class="card-subtitle text-muted">To work properly, KaiaC use an aws s3 backend to store the state of your infrastructure.</h4>
         <h5>So lets suppose that the S3 bucket you created has the following name :</h5>
         <pre>agoralabs-iac-tf-state-bucket
 
         </pre>
 
-        <h2>2) Now you can configure KaiaC!</h2>
+        <h2>3) Now you can configure KaiaC!</h2>
 
         <h3>First execute the following command:</h3>
         <pre>$ kaiac configure</pre>
@@ -60,9 +70,9 @@
             Enter terraform state bucket name [kaiac-tf-state-bucket]: agoralabs-iac-tf-state-bucket
         </pre>
 
-        <h2>3) Now you can use KaiaC!</h2>
+        <h2>4) Now you can use KaiaC!</h2>
 
-        <h3>Let's create a t2.micro EC2 virtual machine with Kaiac.</h3>
+        <h3>Let's create a t2.micro EC2 virtual machine with KaiaC.</h3>
 
         <h4>Step 1 : Create a kvbook</h4>
         <h5>A kvbook is just the file that contains your key/value(s) configuration informations. You have to create a kvbook to tell KaiaC which type of resources you need.</h5>
