@@ -19,8 +19,7 @@
         <pre>$ wget -O- http://repo-kaiac-prod.skyscaledev.com/v$VERSION/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/kaiac-keyring.gpg</pre>
 
         <h3>5) Add the official KaiaC Linux repository :</h3>
-        <pre>$ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/kaiac-keyring.gpg] http://repo-kaiac-prod.skyscaledev.com/v$VERSION/apt-repo stable main" </pre>
-        <pre> | sudo tee /etc/apt/sources.list.d/kaiac.list</pre>
+        <pre>$ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/kaiac-keyring.gpg] http://repo-kaiac-prod.skyscaledev.com/v$VERSION/apt-repo stable main" | sudo tee /etc/apt/sources.list.d/kaiac.list</pre>
 
         <h3>6) Download and refresh package index :</h3>
         <pre>$ sudo apt update</pre>
@@ -29,18 +28,18 @@
         <pre>$ sudo apt-get install kaiac</pre>
 
         <h1>Verify KaiaC</h1>
-        <h3>To verify your installation, use the following command:</h3>
+        <h3>To verify your installation, use the following command :</h3>
         <strong><pre>$ kaiac env</pre></strong>
 
-        <h3>The result should look like:</h3>
+        <h3>The result should look like :</h3>
         <pre>
-        VERSION     = 0.0.8
-        STATE       = bucket[Not defined] region[us-west-2] profile[default]
-        RESOURCES   = region[us-west-2] profile[default]
-        COMPOSITION = Not defined
-        KVBOOK      = Not defined
-        MODULE      = Not defined
-        CONTEXT     = namespace[Not defined] name[Not defined] stage[Not defined]
+        VERSION     = <font color="green">0.0.8</font>
+        STATE       = bucket<font color="green">[Not defined]</font> region<font color="green">[us-west-2]</font> profile<font color="green">[default]</font>
+        RESOURCES   = region<font color="green">[us-west-2]</font> profile<font color="green">[default]</font>
+        COMPOSITION = <font color="green">Not defined</font>
+        KVBOOK      = <font color="green">Not defined</font>
+        MODULE      = <font color="green">Not defined</font>
+        CONTEXT     = namespace<font color="green">[Not defined]</font> name<font color="green">[Not defined]</font> stage<font color="green">[Not defined]</font>
         </pre>
         <a href="/documentation" class="btn btn-primary">Use KaiaC now</a>
     </div>

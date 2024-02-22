@@ -304,6 +304,141 @@ Previous KvBook /alfresco/5_operations.cfg registred!
             </table>
         </div>
         <pre></pre>
+
+        <h2>6) Explore KaiaC Modules !</h2>
+
+        <h4 class="card-subtitle text-muted">KaiaC provides a set Modules ready to use in your KvBooks.</h4>
+        <h5 class="card-subtitle text-muted">To use a module, just hit the following command, the KaiaC module name will be reported in GL_KAIAC_MODULE property of the KvBook :</h5>
+        <pre>$ kaiac create [module_name]</pre>
+        <pre></pre>
+        <h5 class="card-subtitle text-muted">Find below the current supported modules :</h5>
+
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Module name </th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>alb</strong></td>
+                        <td>This module allows you to create an Application Load Balancer with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>asgroup</strong></td>
+                        <td>This module allows you to create an Auto Scaling group behind an exisiting ALB with EC2 instances with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>cicd</strong></td>
+                        <td>This module allows you to create an Application Deployment Pipeline with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>dbdumper</strong></td>
+                        <td>This module allows you to export an SQL Dump from your RDS Database.</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>dbloader</strong></td>
+                        <td>This module allows you to execute an SQL Script on an existing RDS Database. It can then be usefull to load data in your database.</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>dbonly</strong></td>
+                        <td>This module allows you to create a database schema inside an existing RDS instance with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><strong>dbrds</strong></td>
+                        <td>This module allows you to create a RDS instance with KaiaC. A security group will also be created and you can even add a Route 53 DNS record if you need a human readable database endpoint.</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><strong>ecrcopy</strong></td>
+                        <td>This module allows you to pull docker images from Docker Hub and push them into a private ECR repository on AWS with KaiaC. Using images that are stored in ECR is quite useful since you then control the availability of the copied images.</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><strong>lambda</strong></td>
+                        <td>This module allows you to create a Lambda function, and expose it through an API Gateway endpoint.</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><strong>operations</strong></td>
+                        <td>This module allows you to schedule a stop and restart of your EC2 instances. To achieve it KaiaC creates two AWS Systems Manager Maintenance Windows.</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><strong>packer</strong></td>
+                        <td>This module allows you to create an Amazon Machine Image with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><strong>s3bucket</strong></td>
+                        <td>This module allows you to create an S3 Bucket to host a website without a Cloudfront Distribution with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><strong>s3website</strong></td>
+                        <td>This module allows you to create with KaiaC a static website store in an S3 Bucket, a Cloudfront distribution with an existing SSL certificate provided by ACM (AWS Certificates Manager).</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td><strong>swapper</strong></td>
+                        <td>This module allows you to manage swap space to you ubuntu EC2 instance with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td><strong>templater</strong></td>
+                        <td>This module allows you to parse a file containing placeholders with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td><strong>tggroup</strong></td>
+                        <td>This module allows you to create a target group with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td><strong>vm</strong></td>
+                        <td>This module allows you to create an EC2 instance with KaiaC with a DNS record.</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td><strong>vmgroup</strong></td>
+                        <td>This module allows you to create in a private subnet, a target group behind an exisiting ALB with EC2 instances with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td><strong>vmgrouppublic</strong></td>
+                        <td>This module allows you to create in a public subnet, a target group behind an exisiting ALB with EC2 instances with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td><strong>vmonly</strong></td>
+                        <td>This module allows you to create an EC2 instance with KaiaC. This EC2 instance will be created in your default region, default vpc and default public subnet.</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td><strong>vpc</strong></td>
+                        <td>This module allows you to create a VPC, with public and private subnets with KaiaC.</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td><strong>vpcendpoint</strong></td>
+                        <td>This module allows you to create a VPC Endpoint with KaiaC. This VPC Endpoint is useful to access your EC2 instances located in a private subnet.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pre></pre>
+
         <a href="/kvbooks/vpc" class="btn btn-primary">To go deeper, just take a look at the VPC kvbook</a>
     </div>
 </div>
