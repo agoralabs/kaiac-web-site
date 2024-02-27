@@ -1,0 +1,137 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook Amplifier</h1>
+        <h5 class="card-subtitle text-muted">The Amplifier KvBook allow you to build Full-Stack Web and Mobile Apps Faster on AWS with KaiaC.</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a CICD KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-AMPLIFIER.png"
+        alt="kvbooks-AMPLIFIER"
+        width="80%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>cicd001</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>GL_NAME</td>
+                        <td>demo1</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_STAGE</td>
+                        <td>staging</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>amplifier</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_REPO_TOKEN</td>
+                        <td>glpat-jCz5cxJKtmRfAj1a-NV2</td>
+                        <td>Token to connect git repo</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>BE_FULL_REPOSITORY_ID</td>
+                        <td>https://gitlab.com/sky-scale-dev/kaiac/demo-kaiac-amplify.git</td>
+                        <td>Application git repo url</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>BE_SOURCE_BRANCH_NAME</td>
+                        <td>master</td>
+                        <td>The git branch name to deploy</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_AWS_ROUTE53_DOMAIN</td>
+                        <td>skyscaledev.com</td>
+                        <td>AWS Amplify Domain Name</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>BE_FULL_REPOSITORY_ID</td>
+                        <td>agoralabs/demo-kaiac-laravel</td>
+                        <td>The application git repository id. This repository should contains at least a buildspec.yml file</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>FE_DNS</td>
+                        <td>demo-kaiac-amplify</td>
+                        <td>AWS Amplify Sub Domain Name</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>GL_AMPLIFY_PLATFORM</td>
+                        <td>WEB_COMPUTE</td>
+                        <td>Platform WEB(React and Angular) or WEB_COMPUTE (nextjs)</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>GL_INPUT_CONFIG_FILE</td>
+                        <td>/kaiac/001_amplifier_config.json</td>
+                        <td>Amplify JSON environment variables file : 
+                            <pre>
+{{ '{' }}                                
+    "_CUSTOM_IMAGE": "amplify:al2023",
+    "NEXT_PUBLIC_API_ENDPOINT": "https://api-demo-kaiac.skyscaledev.com/api",
+    "NEXT_PUBLIC_GOOGLE_MAP_API_ID": "customMapID",
+    "NEXT_PUBLIC_GOOGLE_MAP_API_KEY": "SQGSSFGSFGfdsgjDummyKdgkkgdhdfkhdfkj"
+{{ '}' }} 
+                                </pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your AWS Amplify Service console.</pre>
+        <pre>Your Amplify application should be created</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to create an Amplify application with KaiaC :</pre>
+        <pre>
+GL_NAMESPACE="demo"
+GL_NAME="kaiac"
+GL_STAGE="staging"
+GL_KAIAC_MODULE="amplifier"
+GL_REPO_TOKEN="glpat-jCz5cxJKtmRfAj1a-NV2"
+BE_FULL_REPOSITORY_ID="https://gitlab.com/sky-scale-dev/kaiac/demo-kaiac-amplify.git"
+BE_SOURCE_BRANCH_NAME="master"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+FE_DNS="demo-kaiac-amplify"
+GL_AMPLIFY_PLATFORM="WEB_COMPUTE"
+GL_INPUT_CONFIG_FILE="/kaiac/001_amplifier_config.json"
+                        
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

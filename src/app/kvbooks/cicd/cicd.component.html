@@ -31,91 +31,91 @@
                         <td>The AWS region your resources will be deployed</td>
                     </tr>
                     <tr>
-                        <td>3</td>
+                        <td>2</td>
                         <td>GL_AWS_CRED_FILE_PATH</td>
                         <td>~/.aws/credentials</td>
                         <td>The AWS credentials file path</td>
                     </tr>
                     <tr>
-                        <td>4</td>
+                        <td>3</td>
                         <td>GL_AWS_CRED_PROFILE</td>
                         <td>default</td>
                         <td>The AWS credentials profile</td>
                     </tr>
                     <tr>
-                        <td>5</td>
+                        <td>4</td>
                         <td>GL_KAIAC_MODULE</td>
                         <td>cicd</td>
                         <td>The name of kaiac module to run</td>
                     </tr>
                     <tr>
-                        <td>6</td>
+                        <td>5</td>
                         <td>GL_NAMESPACE</td>
                         <td>cicd001</td>
                         <td>The application global resources namespace</td>
                     </tr>
                     <tr>
-                        <td>7</td>
+                        <td>6</td>
                         <td>GL_NAME</td>
                         <td>demo1</td>
                         <td>The application name</td>
                     </tr>
                     <tr>
-                        <td>8</td>
+                        <td>7</td>
                         <td>GL_STAGE</td>
                         <td>staging</td>
                         <td>The application stage name</td>
                     </tr>
                     <tr>
-                        <td>9</td>
+                        <td>8</td>
                         <td>GL_AWS_CODEBUILD_IMG</td>
                         <td>aws/codebuild/standard:6.0</td>
                         <td>The AWS CodeBuild Image for compute build env</td>
                     </tr>
                     <tr>
-                        <td>10</td>
+                        <td>9</td>
                         <td>BE_EXISTING_EC2_DEPLOYMENT_GROUP</td>
                         <td>vmgroup001-demo1-staging</td>
                         <td>The Existing EC2 deployment group used by CodeDeploy</td>
                     </tr>
                     <tr>
-                        <td>11</td>
+                        <td>10</td>
                         <td>BE_ASG_EXISTING_NAME</td>
                         <td></td>
                         <td>The Existing autoscaling group name is used</td>
                     </tr>
                     <tr>
-                        <td>12</td>
+                        <td>11</td>
                         <td>GL_CSTAR_CONN_NAME</td>
                         <td>github_agora_conn</td>
                         <td>The name of the codestar git repository connection</td>
                     </tr>
                     <tr>
-                        <td>13</td>
+                        <td>12</td>
                         <td>BE_FULL_REPOSITORY_ID</td>
                         <td>agoralabs/demo-kaiac-laravel</td>
                         <td>The application git repository id. This repository should contains at least a buildspec.yml file</td>
                     </tr>
                     <tr>
-                        <td>14</td>
+                        <td>13</td>
                         <td>BE_SOURCE_BRANCH_NAME</td>
                         <td>main</td>
                         <td>The git branch name to deploy</td>
                     </tr>
                     <tr>
-                        <td>15</td>
+                        <td>14</td>
                         <td>BE_PIPELINE_BUCKET</td>
                         <td>cicd001-demo1-staging</td>
                         <td>The name of S3 bucket to store source zip used in pipelines (will be created)</td>
                     </tr>
                     <tr>
-                        <td>16</td>
+                        <td>15</td>
                         <td>GL_DEPLOY_STAGE_ENABLED</td>
                         <td>true</td>
                         <td>True if deploy stage enabled - False if not</td>
                     </tr>
                     <tr>
-                        <td>17</td>
+                        <td>16</td>
                         <td>GL_INPUT_CONFIG_FILE</td>
                         <td>/cicd_vm_config.json</td>
                         <td>The environment variables config json file to inject in the pipeline : 

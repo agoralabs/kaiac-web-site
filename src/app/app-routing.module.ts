@@ -130,6 +130,10 @@ export const Approutes: Routes = [
         loadChildren: () => import('./kvbooks/vpcendpoint/vpcendpoint.module').then(m => m.VpcEndpointModule)
       },
       {
+        path: 'kvbooks/amplifier',
+        loadChildren: () => import('./kvbooks/amplifier/amplifier.module').then(m => m.AmplifierModule)
+      },
+      {
         path: 'component',
         loadChildren: () => import('./component/component.module').then(m => m.ComponentsModule)
       }
