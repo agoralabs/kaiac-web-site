@@ -1,0 +1,150 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook Federated OIDC Client</h1>
+        <h5 class="card-subtitle text-muted">The Federated OIDC Client KvBook allow you to create an OAuth2 Client with KaiaC for a Cognito UserPool.</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a CICD KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-FEDCLIENT.png"
+        alt="kvbooks-FEDCLIENT"
+        width="80%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>fedclient</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>keycloak</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_NAME</td>
+                        <td>spa</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_STAGE</td>
+                        <td>prod</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_USER_POOL_NAME</td>
+                        <td>keycloak-user-pool</td>
+                        <td>Cognito user pool name</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>GL_USER_POOL_PROVIDER_NAME</td>
+                        <td>keycloak</td>
+                        <td>Cognito user pool provider name</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>GL_USER_POOL_APP_CLIENT_NAME</td>
+                        <td>angularspa</td>
+                        <td>Cognito user pool App client name</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_USER_POOL_APP_CLIENT_CALLBACK_URLS</td>
+                        <td>https://keycloak-cogspa-prod.skyscaledev.com/login</td>
+                        <td>App client allowed callback urls, use commas separator for many urls</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>GL_USER_POOL_APP_CLIENT_LOGOUT_URLS</td>
+                        <td>https://keycloak-demo1-prod.skyscaledev.com/realms/rcognito/protocol/openid-connect/logout</td>
+                        <td>App client allowed logout urls, use commas separator for many urls</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>GL_USER_POOL_OAUTH_FLOWS</td>
+                        <td>implicit, code</td>
+                        <td>App client oauth flows (use implicit, code or client_credentials)</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>GL_USER_POOL_OAUTH_SCOPES</td>
+                        <td>openid, email, profile</td>
+                        <td>App client oauth scopes</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>GL_USER_POOL_OAUTH_CUSTOM_SCOPES</td>
+                        <td>rserverrs/read rserverrs/write</td>
+                        <td>App client oauth custom scopes, usefull with client_credentials flow</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>GL_USER_POOL_OAUTH_REFRESH_TOKEN_VALIDIY</td>
+                        <td>8</td>
+                        <td>App client oauth refresh_token validity in days</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>GL_USER_POOL_OAUTH_ACCESS_TOKEN_VALIDIY</td>
+                        <td>480</td>
+                        <td>App client oauth access_token validity in minutes</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>GL_USER_POOL_OAUTH_ID_TOKEN_VALIDIY</td>
+                        <td>480</td>
+                        <td>App client oauth id_token validity in minutes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your Amazon Cognito Service console.</pre>
+        <pre>Choose you userpool, your client should be created.</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to create a Federated OIDC Client with KaiaC :</pre>
+        <pre>
+GL_KAIAC_MODULE="fedclient"
+GL_NAMESPACE="keycloak"
+GL_NAME="spa"
+GL_STAGE="prod"
+GL_USER_POOL_NAME="keycloak-user-pool"
+GL_USER_POOL_PROVIDER_NAME="keycloak"
+GL_USER_POOL_APP_CLIENT_NAME="angularspa"
+GL_USER_POOL_APP_CLIENT_CALLBACK_URLS="https://keycloak-cogspa-prod.skyscaledev.com/login"
+GL_USER_POOL_APP_CLIENT_LOGOUT_URLS="https://keycloak-demo1-prod.skyscaledev.com/realms/rcognito/protocol/openid-connect/logout"
+GL_USER_POOL_OAUTH_FLOWS="implicit, code"
+GL_USER_POOL_OAUTH_SCOPES="openid, email, profile"
+GL_USER_POOL_OAUTH_CUSTOM_SCOPES=""
+GL_USER_POOL_OAUTH_REFRESH_TOKEN_VALIDIY="8"
+GL_USER_POOL_OAUTH_ACCESS_TOKEN_VALIDIY="480"
+GL_USER_POOL_OAUTH_ID_TOKEN_VALIDIY="480"
+                        
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

@@ -1,0 +1,130 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook KURLER</h1>
+        <h5 class="card-subtitle text-muted">The KURLER KvBook allow you when hitting kaiac apply command 
+            to curl a target to retrieve a token, then use this token to curl a second url (usually a POST endpoint to create a resource). 
+            When hitting kaiac destroy command, a curl is made again to retrieve a token, 
+            and this token is used curl a third url (usually a DELETE endpoint to delete the previously created resource).
+            This KURLER KvBook is usefully to automate the creation of a keycloak OIDC REALM, or an OAuth Client in this REALM.
+        </h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a KURLER KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-KURLER.png"
+        alt="kvbooks-KURLER"
+        width="80%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>kurler</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>keycloak</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>GL_NAME</td>
+                        <td>realm</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_STAGE</td>
+                        <td>prod</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>amplifier</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_INPUT_CONFIG_FILE</td>
+                        <td>/kaiac/5_kurler_keycloak_realm_config.json</td>
+                        <td>URLs configuration file with at least three blocks : 
+                            <pre>
+
+{{ '{' }} 
+    "token": {{ '{' }}
+        "method": "POST",
+        "location" : "https://keycloak-demo1-prod.skyscaledev.com/realms/master/protocol/openid-connect/token",
+        "headers" : ["Content-Type: application/x-www-form-urlencoded"],
+        "body" : [
+            "client_id=admin-cli",
+            "username=admin",
+            "password=keycloak",
+            "grant_type=password"
+        ],
+        "extract" : ".access_token"
+    {{ '}' }},
+    "create": {{ '{' }}
+        "method": "POST",
+        "location" : "https://keycloak-demo1-prod.skyscaledev.com/admin/realms",
+        "headers" : ["Content-Type: application/json"],
+        "body" : 
+        {{ '{' }}
+            "realm": "rcognito",
+            "enabled": true,
+            "requiredCredentials": [
+              "password"
+            ],
+            "users": [],
+            "clients": []
+        {{ '}' }}          
+        
+    {{ '}' }},
+    "destroy": {{ '{' }}
+        "method": "DELETE",
+        "location" : "https://keycloak-demo1-prod.skyscaledev.com/admin/realms/rcognito"
+        {{ '}' }}
+{{ '}' }}
+                                </pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>For example, if the URLs configuration is about creating an OIDC Keycloak REALM, login into your keycloak instance.</pre>
+        <pre>After hitting kaiac apply, your keaycloak realm should be create.</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook :</pre>
+        <pre>
+GL_KAIAC_MODULE="kurler"
+GL_NAMESPACE="keycloak"
+GL_NAME="realm"
+GL_STAGE="prod"
+GL_INPUT_CONFIG_FILE="/kaiac/kurler_keycloak_realm_config.json"
+
+                        
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

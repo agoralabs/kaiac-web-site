@@ -1,0 +1,173 @@
+<div class="card">
+    <div class="card-body">
+        <h1>KvBook Federated OIDC UserPool</h1>
+        <h5 class="card-subtitle text-muted">The Federated OIDC UserPool KvBook allow you to create a Cognito UserPool with a Federated Openid Connect Identity Provider like keycloak.</h5>
+
+        <h2>Design</h2>
+        <pre>This is what you can create with a Federated OIDC UserPool KvBook</pre>
+        <pre>
+        <img
+        src="assets/images/galery/kvbooks/kvbooks-FEDUSERS.png"
+        alt="kvbooks-FEDUSERS"
+        width="80%"/>
+        </pre>
+
+        <h2>Key/Value parameters</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Name</th>
+                        <th class="text-dark font-medium fs-4">Example value</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>GL_KAIAC_MODULE</td>
+                        <td>fedusers</td>
+                        <td>The name of kaiac module to run</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>GL_NAMESPACE</td>
+                        <td>keycloak</td>
+                        <td>The application global resources namespace</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>GL_NAME</td>
+                        <td>upool</td>
+                        <td>The application name</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>GL_STAGE</td>
+                        <td>prod</td>
+                        <td>The application stage name</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GL_COGNITO_DOMAIN_NAME</td>
+                        <td>kaiac</td>
+                        <td>Cognito Userpool sub domain name</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>GL_USER_POOL_NAME</td>
+                        <td>keycloak-user-pool</td>
+                        <td>Cognito user pool name</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>BE_SOURCE_BRANCH_NAME</td>
+                        <td>master</td>
+                        <td>The git branch name to deploy</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>GL_USER_POOL_PROVIDER_TYPE</td>
+                        <td>OIDC</td>
+                        <td>Cognito user pool Federated provider type</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>GL_USER_POOL_PROVIDER_NAME</td>
+                        <td>keycloak</td>
+                        <td>Cognito user pool provider name</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>GL_USER_POOL_PROVIDER_CLIENT_ID</td>
+                        <td>rcognitoclient</td>
+                        <td>Cognito user pool Client ID</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>GL_USER_POOL_PROVIDER_CLIENT_SECRET_SCRIPT</td>
+                        <td>/kaiac/001_client_secret.sh</td>
+                        <td>Cognito user pool Client secret shell script</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>GL_USER_POOL_ATT_REQ_METHOD</td>
+                        <td>POST</td>
+                        <td>Cognito user pool attribute request method</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>GL_USER_POOL_ISSUER_URL</td>
+                        <td>https://keycloak-demo1-prod.skyscaledev.com/realms/rcognito</td>
+                        <td>Cognito user pool issuer url</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>GL_IDENTITY_POOL_NAME</td>
+                        <td>keycloak-identity-pool</td>
+                        <td>Cognito identity pool name</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>GL_USER_POOL_USERNAME_ATTRIBUTES</td>
+                        <td>username, email, phone_number</td>
+                        <td>Cognito user pool username attributes</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>GL_USER_POOL_AUTHORIZE_SCOPES</td>
+                        <td>openid profile email</td>
+                        <td>Cognito user pool authorize scopes</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>GL_USER_POOL_ATTRIBUTE_MAPPING_JSON</td>
+                        <td>/kaiac/001_fedusers.json</td>
+                        <td>Amplify JSON environment variables file : 
+                            <pre>
+{{ '{' }}                                
+    "email": "email",
+    "family_name": "family_name",
+    "given_name": "given_name",
+    "preferred_username": "email",
+    "username": "sub"
+{{ '}' }} 
+                                </pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Results</h2>
+        <pre>Go to your AWS Cognito Service console.</pre>
+        <pre>Your OIDC Federated Cognito UserPool should be created</pre>
+
+        <h2>Try</h2>
+        <pre>You can use this KvBook to try to create an OIDC Federated Cognito UserPool with KaiaC :</pre>
+        <pre>
+GL_KAIAC_MODULE="fedusers"
+GL_NAMESPACE="keycloak"
+GL_NAME="upool"
+GL_STAGE="prod"
+GL_COGNITO_DOMAIN_NAME="kaiac"
+GL_USER_POOL_NAME="keycloak-user-pool"
+GL_USER_POOL_PROVIDER_TYPE="OIDC"
+GL_USER_POOL_PROVIDER_NAME="keycloak"
+GL_USER_POOL_PROVIDER_CLIENT_ID="rcognitoclient"
+GL_USER_POOL_PROVIDER_CLIENT_SECRET_SCRIPT="/kaiac/001_client_secret.sh"
+GL_USER_POOL_ATT_REQ_METHOD="POST"
+GL_USER_POOL_ISSUER_URL="https://keycloak-demo1-prod.skyscaledev.com/realms/rcognito"
+GL_IDENTITY_POOL_NAME="keycloak-identity-pool"
+GL_USER_POOL_USERNAME_ATTRIBUTES="username, email, phone_number"
+GL_USER_POOL_AUTHORIZE_SCOPES="openid profile email"
+GL_USER_POOL_ATTRIBUTE_MAPPING_JSON="/root/kaiac/kvbooks/kaiac/fedusers/001_fedusers.json"
+                        
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

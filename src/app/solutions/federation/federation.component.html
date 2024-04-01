@@ -1,0 +1,617 @@
+<div class="card">
+    <div class="card-body">
+        <h1>OIDC FEDERATION Use Case</h1>
+        <h4 class="card-subtitle text-muted">The OIDC FEDERATION Use Case show you how you can easily setup an OIDC Federation platform with KaiaC on AWS.</h4>
+        
+        <h2>Requirements</h2>
+        <h5>
+            We need a demo platform deployed on Amazon Web Services Cloud (AWS) to showcase the capabilities of 
+            OIDC (OpenID Connect). OpenID Connect is the de facto standard for handling authentication in the modern world.
+            From traditional web applications to single-page apps to native applications, OpenID Connect provides a template 
+            for interoperability that makes it easy to incorporate identity management seamlessly and securely.
+            With Kaiac, this use case will help DevOps to learn how this standard works and how DevOps can leverage it to enhance user experience and security today.
+        </h5>
+
+        <h5>
+            <strong>Infrastructure Requirements</strong>
+            <ul>
+                <li>The Demo platform will utilize AWS infrastructure for reliability and ease of management.</li>
+                <li>The Demo platform deployment will utilize AWS services such as EC2 (Elastic Compute Cloud) for virtual servers.</li>
+                <li>The Demo platform should be accessed using a user friendly URL.</li>
+                <li>The Demo platform should setup OIDC for a Single Page Application.</li>
+                <li>The Demo platform should setup OIDC for a SpringBoot Application API.</li>
+                <li>The Demo platform should setup OIDC with Keycloak.</li>
+                <li>The Demo platform should setup OIDC with Cognito with Keycloak as a Federated Identity Provider.</li>
+                <li>It should be easy to deploy as many demo environments needed.</li>
+            </ul>
+        </h5>
+
+        <h5>
+            <strong>Software Requirements</strong>
+            <ul>
+                <li>The Demo platform should be easy to upgrade or downgrade Keycloak versions deployed on the Demo platform.</li>
+                <li>The Demo platform should use Docker images.</li>
+            </ul>
+        </h5>
+
+        <h2>Solution Architecture</h2>
+        <pre>This is the solution architecture of this OIDC Demo platform:</pre>
+        <pre>
+        <img
+        src="assets/images/galery/solutions/solutions-FEDERATION.png"
+        alt="solutions-FEDERATION"
+        width="80%"/>
+        </pre>
+
+        <h2>KaiaC modules needed</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">#</th>
+                        <th class="text-dark font-medium fs-4">Module</th>
+                        <th class="text-dark font-medium fs-4">KvBook</th>
+                        <th class="text-dark font-medium fs-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>vpc</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="vpc"
+GL_NAMESPACE="keycloak"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_AWS_AZS="us-west-2a,us-west-2b"
+GL_VPC_CREATE="true"
+GL_VPC_ENABLE_NAT_GATEWAY="false"
+GL_VPC_SINGLE_NAT_GATEWAY="true"
+GL_VPC_USE_PRIVATE_SUBNETS="false"
+GL_VPC_CIDR="10.0.0.0/16"
+GL_VPC_CIDR_SUBNET1="10.0.101.0/24"
+GL_VPC_CIDR_SUBNET2="10.0.102.0/24"
+</pre>
+                        </td>
+                        <td>The VPC where Moodle instance will be deployed</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>alb</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="alb"
+GL_NAMESPACE="keycloak"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="keycloak-demo1-prod-vpc"
+GL_VPC_SUBNET_FILTER_NAME="tag:Name"
+GL_VPC_SUBNET_FILTER_VALUE1="keycloak-demo1-prod-public-subnet1"
+GL_VPC_SUBNET_FILTER_VALUE2="keycloak-demo1-prod-public-subnet2"
+</pre>
+                        </td>
+                        <td>The Application LoadBalancer</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>vmgrouppublic</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="vmgrouppublic"
+GL_NAMESPACE="keycloak"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="keycloak-demo1-prod-vpc"
+GL_VPC_SUBNET_FILTER_NAME="tag:Name"
+GL_VPC_SUBNET_FILTER_VALUE1="keycloak-demo1-prod-public-subnet1"
+GL_VPC_SUBNET_FILTER_VALUE2="keycloak-demo1-prod-public-subnet2"
+GL_VPC_USE_PRIVATE_SUBNETS="false"
+BE_PATH_EC2_PUBKEY="~/.ssh/id_rsa.pub"
+BE_EC2_TYPE="t3.large"
+BE_EC2_INSTANCE_COUNT="1"
+BE_EC2_VOLUME_SIZE="20"
+BE_LOCAL_PORT="8080"
+BE_AMI_NAME="ubuntu-docker-nodejs"
+BE_CREATE_DNS="true"
+BE_DNS="keycloak-demo1-prod"
+BE_DOMAIN_NAME="keycloak-demo1-prod.skyscaledev.com"
+BE_EXISTING_ALB_NAME="keycloak-demo1-prod-lb"
+BE_EXISTING_LISTENER_443="false"
+BE_ADD_SNI_CERT="true"
+GL_HEALTH_CHECK_PATH="/"
+</pre>
+                        </td>
+                        <td>The EC2 instance behind the ALB and a target group listening on port 8080 for the Keycloak instance</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>cicd</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="cicd"
+GL_SCRIPT_MODE="cloud"
+GL_NAMESPACE="keycloak"
+GL_NAME="demo1"
+GL_STAGE="prod"
+GL_AWS_CODEBUILD_IMG="aws/codebuild/standard:6.0"
+BE_EXISTING_EC2_DEPLOYMENT_GROUP="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+GL_CSTAR_CONN_NAME="github_agora_conn"
+BE_FULL_REPOSITORY_ID="agoralabs/demo-kaiac-keycloak"
+BE_SOURCE_BRANCH_NAME="main"
+BE_PIPELINE_BUCKET="keycloak-demo1-prod"
+GL_DEPLOY_STAGE_ENABLED="true"
+GL_INPUT_CONFIG_FILE="/root/kaiac/kvbooks/keycloak/4_cicd_keycloak_config.json"
+</pre>
+Environment variables in 4_cicd_keycloak_config.json used by the pipeline steps : 
+                                <pre>
+{{ '{' }}                                
+    "TF_VAR_ENV_APP_GL_SCRIPT_MODE": "cloud",
+    "TF_VAR_ENV_APP_GL_NAME": "demo1",
+    "TF_VAR_ENV_APP_GL_STAGE": "prod",
+    "TF_VAR_ENV_APP_BE_DOMAIN_NAME": "keycloak-demo1-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_URL": "https://keycloak-demo1-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_LOCAL_PORT": "8080",
+    "TF_VAR_ENV_APP_GL_DOCKER_REPOSITORY": "docker.io",
+    "TF_VAR_ENV_APP_BE_LOCAL_SOURCE_FOLDER": "/kaiac/keycloak",
+    "TF_VAR_ENV_APP_GL_AWS_REGION_ECR": "us-west-2"
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The CICD pipeline to redeploy your Keycloak instance</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>kurler</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="kurler"
+GL_NAMESPACE="keycloak"
+GL_NAME="realm"
+GL_STAGE="prod"
+GL_INPUT_CONFIG_FILE="/kaiac/5_kurler_keycloak_realm_config.json"
+                                
+</pre>
+Config in 5_kurler_keycloak_realm_config.json used by the kurler module : 
+                                <pre>
+{{ '{' }} 
+"token": {{ '{' }}
+    "method": "POST",
+    "location" : "https://keycloak-demo1-prod.skyscaledev.com/realms/master/protocol/openid-connect/token",
+    "headers" : ["Content-Type: application/x-www-form-urlencoded"],
+    "body" : [
+        "client_id=admin-cli",
+        "username=admin",
+        "password=keycloak",
+        "grant_type=password"
+    ],
+    "extract" : ".access_token"
+{{ '}' }},
+"create": {{ '{' }}
+    "method": "POST",
+    "location" : "https://keycloak-demo1-prod.skyscaledev.com/admin/realms",
+    "headers" : ["Content-Type: application/json"],
+    "body" : 
+    {{ '{' }}
+        "realm": "rcognito",
+        "enabled": true,
+        "requiredCredentials": [
+            "password"
+        ],
+        "users": [],
+        "clients": []
+    {{ '}' }}          
+    
+{{ '}' }},
+"destroy": {{ '{' }}
+    "method": "DELETE",
+    "location" : "https://keycloak-demo1-prod.skyscaledev.com/admin/realms/rcognito"
+    {{ '}' }}
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The kurler config file to manage a keycloak OIDC REALM, or an OAuth Client in this REALM</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>tggroup</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="tggroup"
+GL_NAMESPACE="keycloak"
+GL_NAME="spa"
+GL_STAGE="prod"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="keycloak-demo1-prod-vpc"
+BE_LOCAL_PORT="8081"
+BE_CREATE_DNS="true"
+BE_DNS="keycloak-spa-prod"
+BE_DOMAIN_NAME="keycloak-spa-prod.skyscaledev.com"
+BE_EXISTING_ALB_NAME="keycloak-demo1-prod-lb"
+BE_EXISTING_LISTENER_443="true"
+BE_ADD_SNI_CERT="true"
+GL_HEALTH_CHECK_PATH="/"
+BE_EC2_INSTANCE_COUNT="1"
+BE_EXISTING_EC2_NAME="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+</pre>
+                        </td>
+                        <td>The Keycloak IdP Angular SPA target group</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><strong>cicd</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="cicd"
+GL_SCRIPT_MODE="cloud"
+GL_NAMESPACE="keycloak"
+GL_NAME="spa"
+GL_STAGE="prod"
+GL_AWS_CODEBUILD_IMG="aws/codebuild/standard:6.0"
+BE_EXISTING_EC2_DEPLOYMENT_GROUP="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+GL_CSTAR_CONN_NAME="github_agora_conn"
+BE_FULL_REPOSITORY_ID="agoralabs/demo-kaiac-keycloak-spa"
+BE_SOURCE_BRANCH_NAME="main"
+BE_PIPELINE_BUCKET="keycloak-spa-prod"
+GL_DEPLOY_STAGE_ENABLED="true"
+GL_INPUT_CONFIG_FILE="/kaiac/8_cicd_spa_config.json"
+                                
+</pre>
+Environment variables in 8_cicd_spa_config.json used by the pipeline steps : 
+                                <pre>
+{{ '{' }}                                
+    "TF_VAR_ENV_APP_GL_SCRIPT_MODE": "cloud",
+    "TF_VAR_ENV_APP_GL_NAMESPACE": "keycloak",
+    "TF_VAR_ENV_APP_GL_NAME": "spa",
+    "TF_VAR_ENV_APP_GL_STAGE": "prod",
+    "TF_VAR_ENV_APP_BE_DOMAIN_NAME": "keycloak-spa-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_URL": "https://keycloak-spa-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_LOCAL_PORT": "8081",
+    "TF_VAR_ENV_APP_BE_LOCAL_SOURCE_FOLDER": "/kaiac/spa",
+    "TF_VAR_ENV_APP_GL_AWS_REGION_ECR": "us-west-2",
+    "TF_VAR_ENV_APP_KC_URL": "https://keycloak-demo1-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_GL_DOCKER_REPOSITORY": "041292242005.dkr.ecr.us-west-2.amazonaws.com"
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The CICD pipeline to redeploy your Keycloak IdP SPA App</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><strong>tggroup</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="tggroup"
+GL_NAMESPACE="keycloak"
+GL_NAME="api"
+GL_STAGE="prod"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="keycloak-demo1-prod-vpc"
+BE_LOCAL_PORT="8082"
+BE_CREATE_DNS="true"
+BE_DNS="keycloak-api-prod"
+BE_DOMAIN_NAME="keycloak-api-prod.skyscaledev.com"
+BE_EXISTING_ALB_NAME="keycloak-demo1-prod-lb"
+BE_EXISTING_LISTENER_443="true"
+BE_ADD_SNI_CERT="true"
+GL_HEALTH_CHECK_PATH="/"
+BE_EC2_INSTANCE_COUNT="1"
+BE_EXISTING_EC2_NAME="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+</pre>
+                        </td>
+                        <td>The Keycloak IdP SpringBoot API target group</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><strong>cicd</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="cicd"
+GL_SCRIPT_MODE="cloud"
+GL_NAMESPACE="keycloak"
+GL_NAME="api"
+GL_STAGE="prod"
+GL_AWS_CODEBUILD_IMG="aws/codebuild/standard:6.0"
+BE_EXISTING_EC2_DEPLOYMENT_GROUP="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+GL_CSTAR_CONN_NAME="github_agora_conn"
+BE_FULL_REPOSITORY_ID="agoralabs/demo-kaiac-keycloak-springboot-api"
+BE_SOURCE_BRANCH_NAME="main"
+BE_PIPELINE_BUCKET="keycloak-api-prod"
+GL_DEPLOY_STAGE_ENABLED="true"
+GL_INPUT_CONFIG_FILE="/kaiac/10_cicd_api_config.json"
+                                
+</pre>
+Environment variables in 10_cicd_api_config.json used by the pipeline steps : 
+                                <pre>
+{{ '{' }}                                
+    "TF_VAR_ENV_APP_GL_SCRIPT_MODE": "cloud",
+    "TF_VAR_ENV_APP_GL_NAMESPACE": "keycloak",
+    "TF_VAR_ENV_APP_GL_NAME": "api",
+    "TF_VAR_ENV_APP_GL_STAGE": "prod",
+    "TF_VAR_ENV_APP_BE_DOMAIN_NAME": "keycloak-api-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_URL": "https://keycloak-api-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_LOCAL_PORT": "8082",
+    "TF_VAR_ENV_APP_BE_LOCAL_SOURCE_FOLDER": "/kaiac/api",
+    "TF_VAR_ENV_APP_GL_AWS_REGION_ECR": "us-west-2",
+    "TF_VAR_ENV_APP_KC_URL": "https://keycloak-demo1-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_KC_REALM_CERTS_URL": "https://keycloak-demo1-prod.skyscaledev.com/realms/rcognito/protocol/openid-connect/certs",
+    "TF_VAR_ENV_APP_GL_DOCKER_REPOSITORY": "041292242005.dkr.ecr.us-west-2.amazonaws.com"
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The CICD pipeline to redeploy your Keycloak IdP SpringBoot API</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><strong>fedusers</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="fedusers"
+GL_NAMESPACE="keycloak"
+GL_NAME="upool"
+GL_STAGE="prod"
+GL_COGNITO_DOMAIN_NAME="kaiac"
+GL_USER_POOL_NAME="keycloak-user-pool"
+GL_USER_POOL_PROVIDER_TYPE="OIDC"
+GL_USER_POOL_PROVIDER_NAME="keycloak"
+GL_USER_POOL_PROVIDER_CLIENT_ID="rcognitoclient"
+GL_USER_POOL_PROVIDER_CLIENT_SECRET_SCRIPT="/kaiac/001_client_secret.sh"
+GL_USER_POOL_ATT_REQ_METHOD="POST"
+GL_USER_POOL_ISSUER_URL="https://keycloak-demo1-prod.skyscaledev.com/realms/rcognito"
+GL_IDENTITY_POOL_NAME="keycloak-identity-pool"
+GL_USER_POOL_USERNAME_ATTRIBUTES="username, email, phone_number"
+GL_USER_POOL_AUTHORIZE_SCOPES="openid profile email"
+GL_USER_POOL_ATTRIBUTE_MAPPING_JSON="/kaiac/001_fedusers.json"
+                                
+</pre>
+Attributes mapping in 001_fedusers.json : 
+                                <pre>
+{{ '{' }}                                
+    "email": "email",
+    "family_name": "family_name",
+    "given_name": "given_name",
+    "preferred_username": "email",
+    "username": "sub"
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The OIDC Federated Cognito UserPool</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><strong>fedclient</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="fedclient"
+GL_NAMESPACE="keycloak"
+GL_NAME="spa"
+GL_STAGE="prod"
+GL_USER_POOL_NAME="keycloak-user-pool"
+GL_USER_POOL_PROVIDER_NAME="keycloak"
+GL_USER_POOL_APP_CLIENT_NAME="angularspa"
+GL_USER_POOL_APP_CLIENT_CALLBACK_URLS="https://keycloak-cogspa-prod.skyscaledev.com/login"
+GL_USER_POOL_APP_CLIENT_LOGOUT_URLS="https://keycloak-demo1-prod.skyscaledev.com/realms/rcognito/protocol/openid-connect/logout"
+GL_USER_POOL_OAUTH_FLOWS="implicit, code"
+GL_USER_POOL_OAUTH_SCOPES="openid, email, profile"
+GL_USER_POOL_OAUTH_CUSTOM_SCOPES=""
+GL_USER_POOL_OAUTH_REFRESH_TOKEN_VALIDIY="8"
+GL_USER_POOL_OAUTH_ACCESS_TOKEN_VALIDIY="480"
+GL_USER_POOL_OAUTH_ID_TOKEN_VALIDIY="480"
+</pre>
+                        </td>
+                        <td>The Cognito OAuth client for Angular SPA</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><strong>fedclient</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="fedclient"
+GL_NAMESPACE="keycloak"
+GL_NAME="api"
+GL_STAGE="prod"
+GL_USER_POOL_NAME="keycloak-user-pool"
+GL_USER_POOL_PROVIDER_NAME="keycloak"
+GL_USER_POOL_APP_CLIENT_NAME="springbootapi"
+GL_USER_POOL_APP_CLIENT_CALLBACK_URLS="https://keycloak-cogapi-prod.skyscaledev.com"
+GL_USER_POOL_APP_CLIENT_LOGOUT_URLS="https://keycloak-cogapi-prod.skyscaledev.com"
+GL_USER_POOL_OAUTH_FLOWS="client_credentials"
+GL_USER_POOL_OAUTH_SCOPES=""
+GL_USER_POOL_OAUTH_CUSTOM_SCOPES="read, write, delete"
+GL_USER_POOL_OAUTH_REFRESH_TOKEN_VALIDIY="8"
+GL_USER_POOL_OAUTH_ACCESS_TOKEN_VALIDIY="480"
+GL_USER_POOL_OAUTH_ID_TOKEN_VALIDIY="480"
+</pre>
+                        </td>
+                        <td>The Cognito OAuth client for SpringBoot API</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><strong>tggroup</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="tggroup"
+GL_NAMESPACE="keycloak"
+GL_NAME="cogspa"
+GL_STAGE="prod"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="keycloak-demo1-prod-vpc"
+BE_LOCAL_PORT="8083"
+BE_CREATE_DNS="true"
+BE_DNS="keycloak-cogspa-prod"
+BE_DOMAIN_NAME="keycloak-cogspa-prod.skyscaledev.com"
+BE_EXISTING_ALB_NAME="keycloak-demo1-prod-lb"
+BE_EXISTING_LISTENER_443="true"
+BE_ADD_SNI_CERT="true"
+GL_HEALTH_CHECK_PATH="/"
+BE_EC2_INSTANCE_COUNT="1"
+BE_EXISTING_EC2_NAME="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+</pre>
+                        </td>
+                        <td>The Cognito IdP Angular SPA target group</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td><strong>cicd</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="cicd"
+GL_SCRIPT_MODE="cloud"
+GL_NAMESPACE="keycloak"
+GL_NAME="cogspa"
+GL_STAGE="prod"
+GL_AWS_CODEBUILD_IMG="aws/codebuild/standard:6.0"
+BE_EXISTING_EC2_DEPLOYMENT_GROUP="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+GL_CSTAR_CONN_NAME="github_agora_conn"
+BE_FULL_REPOSITORY_ID="agoralabs/demo-kaiac-cognito-spa"
+BE_SOURCE_BRANCH_NAME="master"
+BE_PIPELINE_BUCKET="keycloak-cogspa-prod"
+GL_DEPLOY_STAGE_ENABLED="true"
+GL_INPUT_CONFIG_FILE="/root/kaiac/kvbooks/keycloak/15_cicd_cognito_spa_config.json"
+                                
+</pre>
+Environment variables in 8_cicd_spa_config.json used by the pipeline steps : 
+                                <pre>
+{{ '{' }}                                
+    "TF_VAR_ENV_APP_GL_SCRIPT_MODE": "cloud",
+    "TF_VAR_ENV_APP_GL_NAMESPACE": "keycloak",
+    "TF_VAR_ENV_APP_GL_NAME": "cogspa",
+    "TF_VAR_ENV_APP_GL_STAGE": "prod",
+    "TF_VAR_ENV_APP_BE_DOMAIN_NAME": "keycloak-cogspa-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_URL": "https://keycloak-cogspa-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_LOCAL_PORT": "8083",
+    "TF_VAR_ENV_APP_BE_LOCAL_SOURCE_FOLDER": "/kaiac/cogspa",
+    "TF_VAR_ENV_APP_GL_AWS_REGION_ECR": "us-west-2",
+    "TF_VAR_ENV_APP_KC_URL": "https://keycloak-demo1-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_GL_DOCKER_REPOSITORY": "041292242005.dkr.ecr.us-west-2.amazonaws.com",
+    "TF_VAR_ENV_APP_GL_AWS_REGION": "us-west-2",
+    "TF_VAR_ENV_APP_GL_IDENTITY_POOL_NAME": "keycloak-identity-pool",
+    "TF_VAR_ENV_APP_GL_USER_POOL_ID": "us-west-2_bfGKxX13v",
+    "TF_VAR_ENV_APP_GL_USER_POOL_CLIENT_ID": "6n413ke6v6e6q8et47e0jqcg9s",
+    "TF_VAR_ENV_APP_GL_OAUTH_DOMAIN": "kaiac.auth.us-west-2.amazoncognito.com",
+    "TF_VAR_ENV_APP_GL_OAUTH_REDIRECT_LOGIN": "https://keycloak-cogspa-prod.skyscaledev.com/login",
+    "TF_VAR_ENV_APP_GL_OAUTH_REDIRECT_LOGOUT": "https://keycloak-cogspa-prod.skyscaledev.com/login"
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The CICD pipeline to redeploy your Cognito IdP SPA App</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td><strong>tggroup</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="tggroup"
+GL_NAMESPACE="keycloak"
+GL_NAME="cogapi"
+GL_STAGE="prod"
+GL_AWS_ROUTE53_DOMAIN="skyscaledev.com"
+GL_DNS_RECORD_TTL="300"
+GL_VPC_FILTER_NAME="tag:Name"
+GL_VPC_FILTER_VALUE="keycloak-demo1-prod-vpc"
+BE_LOCAL_PORT="8084"
+BE_CREATE_DNS="true"
+BE_DNS="keycloak-cogapi-prod"
+BE_DOMAIN_NAME="keycloak-cogapi-prod.skyscaledev.com"
+BE_EXISTING_ALB_NAME="keycloak-demo1-prod-lb"
+BE_EXISTING_LISTENER_443="true"
+BE_ADD_SNI_CERT="true"
+GL_HEALTH_CHECK_PATH="/"
+BE_EC2_INSTANCE_COUNT="1"
+BE_EXISTING_EC2_NAME="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+</pre>
+                        </td>
+                        <td>The Cognito IdP SpringBoot API target group</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td><strong>cicd</strong></td>
+                        <td>
+                            <pre>
+GL_KAIAC_MODULE="cicd"
+GL_SCRIPT_MODE="cloud"
+GL_NAMESPACE="keycloak"
+GL_NAME="cogapi"
+GL_STAGE="prod"
+GL_AWS_CODEBUILD_IMG="aws/codebuild/standard:6.0"
+BE_EXISTING_EC2_DEPLOYMENT_GROUP="keycloak-demo1-prod"
+BE_ASG_EXISTING_NAME=""
+GL_CSTAR_CONN_NAME="github_agora_conn"
+BE_FULL_REPOSITORY_ID="agoralabs/demo-kaiac-cognito-springboot-api"
+BE_SOURCE_BRANCH_NAME="master"
+BE_PIPELINE_BUCKET="keycloak-cogapi-prod"
+GL_DEPLOY_STAGE_ENABLED="true"
+GL_INPUT_CONFIG_FILE="/root/kaiac/kvbooks/keycloak/17_cicd_cognito_apisb_config.json"
+                                
+</pre>
+Environment variables in 17_cicd_cognito_apisb_config.json used by the pipeline steps : 
+                                <pre>
+{{ '{' }}                                
+    "TF_VAR_ENV_APP_GL_SCRIPT_MODE": "cloud",
+    "TF_VAR_ENV_APP_GL_NAMESPACE": "keycloak",
+    "TF_VAR_ENV_APP_GL_NAME": "cogspa",
+    "TF_VAR_ENV_APP_GL_STAGE": "prod",
+    "TF_VAR_ENV_APP_BE_DOMAIN_NAME": "keycloak-cogspa-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_URL": "https://keycloak-cogspa-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_BE_LOCAL_PORT": "8083",
+    "TF_VAR_ENV_APP_BE_LOCAL_SOURCE_FOLDER": "/kaiac/cogspa",
+    "TF_VAR_ENV_APP_GL_AWS_REGION_ECR": "us-west-2",
+    "TF_VAR_ENV_APP_KC_URL": "https://keycloak-demo1-prod.skyscaledev.com",
+    "TF_VAR_ENV_APP_GL_DOCKER_REPOSITORY": "041292242005.dkr.ecr.us-west-2.amazonaws.com",
+    "TF_VAR_ENV_APP_GL_AWS_REGION": "us-west-2",
+    "TF_VAR_ENV_APP_GL_IDENTITY_POOL_NAME": "keycloak-identity-pool",
+    "TF_VAR_ENV_APP_GL_USER_POOL_ID": "us-west-2_bfGKxX13v",
+    "TF_VAR_ENV_APP_GL_USER_POOL_CLIENT_ID": "6n413ke6v6e6q8et47e0jqcg9s",
+    "TF_VAR_ENV_APP_GL_OAUTH_DOMAIN": "kaiac.auth.us-west-2.amazoncognito.com",
+    "TF_VAR_ENV_APP_GL_OAUTH_REDIRECT_LOGIN": "https://keycloak-cogspa-prod.skyscaledev.com/login",
+    "TF_VAR_ENV_APP_GL_OAUTH_REDIRECT_LOGOUT": "https://keycloak-cogspa-prod.skyscaledev.com/login"
+{{ '}' }}
+</pre>
+                        </td>
+                        <td>The CICD pipeline to redeploy your Cognito IdP SpringBoot API</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Screenshots</h2>
+        <pre>Some screenshots of this OIDC Demo platform:</pre>
+        <pre>The Keycloak REALM.</pre>
+        <pre>
+        <img
+        src="assets/images/galery/solutions/solutions-FEDERATION-screenshot1.png"
+        alt="solutions-FEDERATION-screenshot1"
+        width="80%"/>
+        </pre>
+
+        <pre>Some Keycloak REALM config.</pre>
+        <pre>
+        <img
+        src="assets/images/galery/solutions/solutions-FEDERATION-screenshot2.png"
+        alt="solutions-FEDERATION-screenshot-skin"
+        width="80%"/>
+        </pre>
+
+        <a href="/roadmap" class="btn btn-primary">Take a look at KaiaC Roadmap</a>
+    </div>
+</div>
+
+

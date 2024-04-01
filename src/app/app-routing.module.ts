@@ -42,6 +42,10 @@ export const Approutes: Routes = [
         loadChildren: () => import('./solutions/moodle/moodle.module').then(m => m.MoodleModule)
       },
       {
+        path: 'solutions/federation',
+        loadChildren: () => import('./solutions/federation/federation.module').then(m => m.FederationModule)
+      },
+      {
         path: 'kvbooks/vpc',
         loadChildren: () => import('./kvbooks/vpc/vpc.module').then(m => m.VpcModule)
       },
@@ -132,6 +136,18 @@ export const Approutes: Routes = [
       {
         path: 'kvbooks/amplifier',
         loadChildren: () => import('./kvbooks/amplifier/amplifier.module').then(m => m.AmplifierModule)
+      },
+      {
+        path: 'kvbooks/kurler',
+        loadChildren: () => import('./kvbooks/kurler/kurler.module').then(m => m.KurlerModule)
+      },
+      {
+        path: 'kvbooks/fedusers',
+        loadChildren: () => import('./kvbooks/fedusers/fedusers.module').then(m => m.FedUsersModule)
+      },
+      {
+        path: 'kvbooks/fedclient',
+        loadChildren: () => import('./kvbooks/fedclient/fedclient.module').then(m => m.FedClientModule)
       },
       {
         path: 'component',
